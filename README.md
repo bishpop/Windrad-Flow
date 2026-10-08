@@ -276,4 +276,6 @@ Both builds share the same code; the Chromium build adds the files above.
 
 ## License
 
-[MIT](LICENSE) © Sanya ([bishpop](https://github.com/bishpop))
+[MIT](LICENSE) 
+
+Made by bishpop
