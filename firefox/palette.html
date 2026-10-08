@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Windrad Flow</title>
+  <link rel="stylesheet" href="palette.css">
+</head>
+<body>
+  <div id="scrim"></div>
+  <div id="card" role="dialog" aria-modal="true">
+    <div class="field">
+      <span class="search-ico"></span>
+      <input id="q" type="text" autocomplete="off" spellcheck="false" role="combobox"
+             aria-expanded="true" aria-controls="list" aria-autocomplete="list">
+      <kbd>Esc</kbd>
+    </div>
+    <div id="list" role="listbox"></div>
+    <footer id="hints"></footer>
+  </div>
+  <script src="shared.js"></script>
+  <script src="palette.js"></script>
+</body>
+</html>

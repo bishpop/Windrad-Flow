@@ -1,0 +1,184 @@
+{
+  "extDescription": {
+    "message": "Zen/Arc-style tools for Firefox: command bar, auto-archive, spaces, notes per page and boosts."
+  },
+  "cmdPalette": {
+    "message": "Open the command bar"
+  },
+  "cmdNextSpace": {
+    "message": "Next space"
+  },
+  "cmdPrevSpace": {
+    "message": "Previous space"
+  },
+  "cmdNote": {
+    "message": "Note for this page"
+  },
+  "openNewTab": {
+    "message": "Open in new tab"
+  },
+  "copyLink": {
+    "message": "Copy link"
+  },
+  "copied": {
+    "message": "Copied"
+  },
+  "close": {
+    "message": "Close (Esc)"
+  },
+  "loading": {
+    "message": "Loading …"
+  },
+  "optTitle": {
+    "message": "Windrad Peek – Settings"
+  },
+  "optAccess": {
+    "message": "Access to websites"
+  },
+  "optAccessOk": {
+    "message": "Peek can work on all websites."
+  },
+  "optAccessMissing": {
+    "message": "Peek needs access to websites to show previews."
+  },
+  "optGrant": {
+    "message": "Allow access"
+  },
+  "optTrigger": {
+    "message": "Open a preview with"
+  },
+  "optSize": {
+    "message": "Size of the window"
+  },
+  "optWidth": {
+    "message": "Width"
+  },
+  "optHeight": {
+    "message": "Height"
+  },
+  "optDim": {
+    "message": "Dim the page behind"
+  },
+  "optBlur": {
+    "message": "Blur the page behind"
+  },
+  "optOutside": {
+    "message": "Close when clicking outside"
+  },
+  "optColors": {
+    "message": "Colors"
+  },
+  "optColor1": {
+    "message": "Color 1"
+  },
+  "optColor2": {
+    "message": "Color 2"
+  },
+  "optReset": {
+    "message": "Reset to pink / teal"
+  },
+  "optSaved": {
+    "message": "Saved"
+  },
+  "optNote": {
+    "message": "Previews run in an embedded frame: on some sites you are not logged in there. “Open in new tab” always opens the real page."
+  },
+  "optVersion": {
+    "message": "Version $V$",
+    "placeholders": {
+      "v": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Show previews as"
+  },
+  "modeOverlay": {
+    "message": "Floating in the page"
+  },
+  "modePopup": {
+    "message": "Popup window"
+  },
+  "optModeHint": {
+    "message": "Floating: looks like Zen, but on some sites you're not logged in. Popup: a small real browser window – always logged in, works on every site."
+  },
+  "optCloseOnBlur": {
+    "message": "Close the popup when you go back to the browser"
+  },
+  "optOverlay": {
+    "message": "Floating window"
+  },
+  "optPopup": {
+    "message": "Popup window"
+  },
+  "popupToTab": {
+    "message": "Open as tab"
+  },
+  "popupClose": {
+    "message": "Close"
+  },
+  "popEnabled": {
+    "message": "Peek on"
+  },
+  "popAll": {
+    "message": "All settings"
+  },
+  "optEnabled": {
+    "message": "Peek on"
+  },
+  "optUseLogin": {
+    "message": "Stay logged in inside previews"
+  },
+  "optUseLoginHint": {
+    "message": "Sends your normal cookies to the previewed site – only from the preview, only while it is open. Most sites then show you logged in; a few (e.g. YouTube buttons like Like) may still not work fully."
+  },
+  "reload": {
+    "message": "Reload"
+  },
+  "maximize": {
+    "message": "Maximize"
+  },
+  "restoreSize": {
+    "message": "Normal size"
+  },
+  "menuOpen": {
+    "message": "Open in Peek"
+  },
+  "menuSearch": {
+    "message": "Search “%s” in Peek"
+  },
+  "cmdSearch": {
+    "message": "Search the selected text in Peek"
+  },
+  "optSearch": {
+    "message": "Search selected text"
+  },
+  "optEngine": {
+    "message": "Search engine"
+  },
+  "optSearchHint": {
+    "message": "Select text and press the shortcut, or right-click it → “Search … in Peek”. Change the shortcut in Firefox: about:addons → gear icon → Manage Extension Shortcuts."
+  },
+  "optShortcut": {
+    "message": "Shortcut"
+  },
+  "kindFull": {
+    "message": "With toolbar & extensions"
+  },
+  "kindSlim": {
+    "message": "Slim (no bars)"
+  },
+  "kindHint": {
+    "message": "“With toolbar & extensions” opens a small normal Firefox window: address bar, extension buttons (uBlock, Dark Reader …) and everything else are there. “Slim” has no bars at all."
+  },
+  "cmdPeekSearch": {
+    "message": "Search the selected text in Peek"
+  },
+  "cmdMenu": {
+    "message": "Open the Windrad Flow menu"
+  },
+  "cmdCopyUrl": {
+    "message": "Copy the address of the current page"
+  }
+}

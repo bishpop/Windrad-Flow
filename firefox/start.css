@@ -1,0 +1,721 @@
+/* =====================================================================
+   Windrad Start – gleiche Farben & Glas wie die userChrome.css
+   ===================================================================== */
+:root {
+  --night:  #0f2a3a;
+  --blue:   #1d2a4a;
+  --violet: #2c2144;
+  --wine:   #321f3c;
+  --accent: #ff7a95;   /* Farbe 1 (Standard Pink) – per Einstellungen änderbar */
+  --teal:   #4fe3e0;   /* Farbe 2 (Standard Teal) – per Einstellungen änderbar */
+  --text:   #eee7f6;
+  --muted:  rgba(238, 231, 246, 0.6);
+  --panel:  #142636;
+
+  --glass:        rgba(255, 255, 255, 0.06);
+  --glass-hover:  rgba(255, 255, 255, 0.11);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shine:  inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --blur:         blur(18px) saturate(1.3);
+
+  --r-small: 10px;
+  --r:       16px;
+  --dim: 0.35;       /* wird per JS gesetzt */
+  --bg-blur: 0px;
+
+  color-scheme: dark;
+
+  /* Formen für die Kacheln (SVG-Masken) */
+  --shape-cloud: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M98.00%2050.00%20L97.90%2051.25%20L97.59%2052.49%20L97.10%2053.71%20L96.45%2054.88%20L95.67%2056.01%20L94.79%2057.09%20L93.87%2058.13%20L92.93%2059.13%20L92.02%2060.09%20L91.19%2061.04%20L90.45%2061.98%20L89.82%2062.94%20L89.34%2063.93%20L88.98%2064.96%20L88.76%2066.06%20L88.66%2067.21%20L88.65%2068.43%20L88.70%2069.72%20L88.78%2071.06%20L88.85%2072.43%20L88.87%2073.82%20L88.82%2075.21%20L88.65%2076.56%20L88.35%2077.86%20L87.89%2079.08%20L87.27%2080.18%20L86.49%2081.17%20L85.56%2082.02%20L84.48%2082.72%20L83.29%2083.29%20L82.01%2083.73%20L80.67%2084.06%20L79.29%2084.30%20L77.92%2084.48%20L76.58%2084.64%20L75.28%2084.80%20L74.06%2085.00%20L72.91%2085.28%20L71.84%2085.65%20L70.86%2086.13%20L69.95%2086.74%20L69.10%2087.48%20L68.28%2088.33%20L67.50%2089.30%20L66.71%2090.33%20L65.90%2091.42%20L65.06%2092.52%20L64.16%2093.59%20L63.21%2094.59%20L62.19%2095.48%20L61.10%2096.22%20L59.95%2096.80%20L58.75%2097.19%20L57.50%2097.37%20L56.23%2097.35%20L54.95%2097.14%20L53.68%2096.75%20L52.42%2096.22%20L51.19%2095.58%20L50.00%2094.86%20L48.84%2094.11%20L47.73%2093.37%20L46.64%2092.69%20L45.58%2092.09%20L44.52%2091.60%20L43.47%2091.24%20L42.40%2091.03%20L41.29%2090.96%20L40.15%2091.02%20L38.96%2091.19%20L37.73%2091.44%20L36.44%2091.74%20L35.11%2092.05%20L33.75%2092.34%20L32.37%2092.56%20L31.00%2092.67%20L29.66%2092.65%20L28.36%2092.46%20L27.14%2092.11%20L26.00%2091.57%20L24.97%2090.85%20L24.04%2089.97%20L23.24%2088.94%20L22.55%2087.79%20L21.96%2086.54%20L21.46%2085.24%20L21.03%2083.92%20L20.63%2082.62%20L20.25%2081.35%20L19.85%2080.15%20L19.40%2079.04%20L18.88%2078.02%20L18.27%2077.10%20L17.55%2076.28%20L16.71%2075.54%20L15.76%2074.87%20L14.71%2074.25%20L13.57%2073.66%20L12.38%2073.06%20L11.15%2072.43%20L9.93%2071.76%20L8.76%2071.01%20L7.67%2070.19%20L6.70%2069.28%20L5.87%2068.28%20L5.22%2067.19%20L4.76%2066.02%20L4.50%2064.79%20L4.42%2063.50%20L4.52%2062.19%20L4.78%2060.86%20L5.17%2059.53%20L5.65%2058.22%20L6.18%2056.94%20L6.72%2055.70%20L7.22%2054.50%20L7.66%2053.33%20L8.00%2052.20%20L8.21%2051.09%20L8.28%2050.00%20L8.21%2048.91%20L8.00%2047.80%20L7.66%2046.67%20L7.22%2045.50%20L6.72%2044.30%20L6.18%2043.06%20L5.65%2041.78%20L5.17%2040.47%20L4.78%2039.14%20L4.52%2037.81%20L4.42%2036.50%20L4.50%2035.21%20L4.76%2033.98%20L5.22%2032.81%20L5.87%2031.72%20L6.70%2030.72%20L7.67%2029.81%20L8.76%2028.99%20L9.93%2028.24%20L11.15%2027.57%20L12.38%2026.94%20L13.57%2026.34%20L14.71%2025.75%20L15.76%2025.13%20L16.71%2024.46%20L17.55%2023.72%20L18.27%2022.90%20L18.88%2021.98%20L19.40%2020.96%20L19.85%2019.85%20L20.25%2018.65%20L20.63%2017.38%20L21.03%2016.08%20L21.46%2014.76%20L21.96%2013.46%20L22.55%2012.21%20L23.24%2011.06%20L24.04%2010.03%20L24.97%209.15%20L26.00%208.43%20L27.14%207.89%20L28.36%207.54%20L29.66%207.35%20L31.00%207.33%20L32.37%207.44%20L33.75%207.66%20L35.11%207.95%20L36.44%208.26%20L37.73%208.56%20L38.96%208.81%20L40.15%208.98%20L41.29%209.04%20L42.40%208.97%20L43.47%208.76%20L44.52%208.40%20L45.58%207.91%20L46.64%207.31%20L47.73%206.63%20L48.84%205.89%20L50.00%205.14%20L51.19%204.42%20L52.42%203.78%20L53.68%203.25%20L54.95%202.86%20L56.23%202.65%20L57.50%202.63%20L58.75%202.81%20L59.95%203.20%20L61.10%203.78%20L62.19%204.52%20L63.21%205.41%20L64.16%206.41%20L65.06%207.48%20L65.90%208.58%20L66.71%209.67%20L67.50%2010.70%20L68.28%2011.67%20L69.10%2012.52%20L69.95%2013.26%20L70.86%2013.87%20L71.84%2014.35%20L72.91%2014.72%20L74.06%2015.00%20L75.28%2015.20%20L76.58%2015.36%20L77.92%2015.52%20L79.29%2015.70%20L80.67%2015.94%20L82.01%2016.27%20L83.29%2016.71%20L84.48%2017.28%20L85.56%2017.98%20L86.49%2018.83%20L87.27%2019.82%20L87.89%2020.92%20L88.35%2022.14%20L88.65%2023.44%20L88.82%2024.79%20L88.87%2026.18%20L88.85%2027.57%20L88.78%2028.94%20L88.70%2030.28%20L88.65%2031.57%20L88.66%2032.79%20L88.76%2033.94%20L88.98%2035.04%20L89.34%2036.07%20L89.82%2037.06%20L90.45%2038.02%20L91.19%2038.96%20L92.02%2039.91%20L92.93%2040.87%20L93.87%2041.87%20L94.79%2042.91%20L95.67%2043.99%20L96.45%2045.12%20L97.10%2046.29%20L97.59%2047.51%20L97.90%2048.75Z%27/%3E%3C/svg%3E");
+  --shape-clover: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M84.76%2050.00%20L84.78%2050.91%20L84.86%2051.83%20L84.97%2052.75%20L85.14%2053.69%20L85.34%2054.65%20L85.58%2055.64%20L85.85%2056.64%20L86.14%2057.68%20L86.45%2058.75%20L86.77%2059.85%20L87.09%2060.99%20L87.41%2062.15%20L87.71%2063.35%20L87.98%2064.58%20L88.23%2065.84%20L88.43%2067.11%20L88.59%2068.41%20L88.69%2069.71%20L88.73%2071.03%20L88.70%2072.34%20L88.60%2073.65%20L88.42%2074.95%20L88.16%2076.22%20L87.81%2077.47%20L87.38%2078.68%20L86.86%2079.85%20L86.25%2080.96%20L85.56%2082.02%20L84.79%2083.02%20L83.94%2083.94%20L83.02%2084.79%20L82.02%2085.56%20L80.96%2086.25%20L79.85%2086.86%20L78.68%2087.38%20L77.47%2087.81%20L76.22%2088.16%20L74.95%2088.42%20L73.65%2088.60%20L72.34%2088.70%20L71.03%2088.73%20L69.71%2088.69%20L68.41%2088.59%20L67.11%2088.43%20L65.84%2088.23%20L64.58%2087.98%20L63.35%2087.71%20L62.15%2087.41%20L60.99%2087.09%20L59.85%2086.77%20L58.75%2086.45%20L57.68%2086.14%20L56.64%2085.85%20L55.64%2085.58%20L54.65%2085.34%20L53.69%2085.14%20L52.75%2084.97%20L51.83%2084.86%20L50.91%2084.78%20L50.00%2084.76%20L49.09%2084.78%20L48.17%2084.86%20L47.25%2084.97%20L46.31%2085.14%20L45.35%2085.34%20L44.36%2085.58%20L43.36%2085.85%20L42.32%2086.14%20L41.25%2086.45%20L40.15%2086.77%20L39.01%2087.09%20L37.85%2087.41%20L36.65%2087.71%20L35.42%2087.98%20L34.16%2088.23%20L32.89%2088.43%20L31.59%2088.59%20L30.29%2088.69%20L28.97%2088.73%20L27.66%2088.70%20L26.35%2088.60%20L25.05%2088.42%20L23.78%2088.16%20L22.53%2087.81%20L21.32%2087.38%20L20.15%2086.86%20L19.04%2086.25%20L17.98%2085.56%20L16.98%2084.79%20L16.06%2083.94%20L15.21%2083.02%20L14.44%2082.02%20L13.75%2080.96%20L13.14%2079.85%20L12.62%2078.68%20L12.19%2077.47%20L11.84%2076.22%20L11.58%2074.95%20L11.40%2073.65%20L11.30%2072.34%20L11.27%2071.03%20L11.31%2069.71%20L11.41%2068.41%20L11.57%2067.11%20L11.77%2065.84%20L12.02%2064.58%20L12.29%2063.35%20L12.59%2062.15%20L12.91%2060.99%20L13.23%2059.85%20L13.55%2058.75%20L13.86%2057.68%20L14.15%2056.64%20L14.42%2055.64%20L14.66%2054.65%20L14.86%2053.69%20L15.03%2052.75%20L15.14%2051.83%20L15.22%2050.91%20L15.24%2050.00%20L15.22%2049.09%20L15.14%2048.17%20L15.03%2047.25%20L14.86%2046.31%20L14.66%2045.35%20L14.42%2044.36%20L14.15%2043.36%20L13.86%2042.32%20L13.55%2041.25%20L13.23%2040.15%20L12.91%2039.01%20L12.59%2037.85%20L12.29%2036.65%20L12.02%2035.42%20L11.77%2034.16%20L11.57%2032.89%20L11.41%2031.59%20L11.31%2030.29%20L11.27%2028.97%20L11.30%2027.66%20L11.40%2026.35%20L11.58%2025.05%20L11.84%2023.78%20L12.19%2022.53%20L12.62%2021.32%20L13.14%2020.15%20L13.75%2019.04%20L14.44%2017.98%20L15.21%2016.98%20L16.06%2016.06%20L16.98%2015.21%20L17.98%2014.44%20L19.04%2013.75%20L20.15%2013.14%20L21.32%2012.62%20L22.53%2012.19%20L23.78%2011.84%20L25.05%2011.58%20L26.35%2011.40%20L27.66%2011.30%20L28.97%2011.27%20L30.29%2011.31%20L31.59%2011.41%20L32.89%2011.57%20L34.16%2011.77%20L35.42%2012.02%20L36.65%2012.29%20L37.85%2012.59%20L39.01%2012.91%20L40.15%2013.23%20L41.25%2013.55%20L42.32%2013.86%20L43.36%2014.15%20L44.36%2014.42%20L45.35%2014.66%20L46.31%2014.86%20L47.25%2015.03%20L48.17%2015.14%20L49.09%2015.22%20L50.00%2015.24%20L50.91%2015.22%20L51.83%2015.14%20L52.75%2015.03%20L53.69%2014.86%20L54.65%2014.66%20L55.64%2014.42%20L56.64%2014.15%20L57.68%2013.86%20L58.75%2013.55%20L59.85%2013.23%20L60.99%2012.91%20L62.15%2012.59%20L63.35%2012.29%20L64.58%2012.02%20L65.84%2011.77%20L67.11%2011.57%20L68.41%2011.41%20L69.71%2011.31%20L71.03%2011.27%20L72.34%2011.30%20L73.65%2011.40%20L74.95%2011.58%20L76.22%2011.84%20L77.47%2012.19%20L78.68%2012.62%20L79.85%2013.14%20L80.96%2013.75%20L82.02%2014.44%20L83.02%2015.21%20L83.94%2016.06%20L84.79%2016.98%20L85.56%2017.98%20L86.25%2019.04%20L86.86%2020.15%20L87.38%2021.32%20L87.81%2022.53%20L88.16%2023.78%20L88.42%2025.05%20L88.60%2026.35%20L88.70%2027.66%20L88.73%2028.97%20L88.69%2030.29%20L88.59%2031.59%20L88.43%2032.89%20L88.23%2034.16%20L87.98%2035.42%20L87.71%2036.65%20L87.41%2037.85%20L87.09%2039.01%20L86.77%2040.15%20L86.45%2041.25%20L86.14%2042.32%20L85.85%2043.36%20L85.58%2044.36%20L85.34%2045.35%20L85.14%2046.31%20L84.97%2047.25%20L84.86%2048.17%20L84.78%2049.09Z%27/%3E%3C/svg%3E");
+  --shape-flower: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M98.00%2050.00%20L97.92%2051.25%20L97.68%2052.50%20L97.29%2053.72%20L96.76%2054.91%20L96.10%2056.07%20L95.32%2057.18%20L94.44%2058.24%20L93.48%2059.24%20L92.46%2060.19%20L91.40%2061.09%20L90.32%2061.94%20L89.25%2062.75%20L88.20%2063.53%20L87.19%2064.28%20L86.24%2065.01%20L85.35%2065.74%20L84.55%2066.48%20L83.83%2067.24%20L83.20%2068.03%20L82.66%2068.86%20L82.21%2069.74%20L81.84%2070.68%20L81.54%2071.68%20L81.31%2072.75%20L81.12%2073.88%20L80.96%2075.07%20L80.81%2076.32%20L80.67%2077.61%20L80.50%2078.95%20L80.30%2080.30%20L80.05%2081.67%20L79.74%2083.03%20L79.35%2084.36%20L78.87%2085.66%20L78.30%2086.89%20L77.64%2088.04%20L76.87%2089.10%20L76.01%2090.05%20L75.05%2090.87%20L74.00%2091.57%20L72.87%2092.13%20L71.68%2092.54%20L70.42%2092.82%20L69.12%2092.95%20L67.79%2092.95%20L66.44%2092.83%20L65.09%2092.60%20L63.73%2092.27%20L62.40%2091.86%20L61.09%2091.40%20L59.82%2090.89%20L58.58%2090.37%20L57.38%2089.84%20L56.23%2089.34%20L55.12%2088.89%20L54.04%2088.48%20L53.00%2088.16%20L51.99%2087.91%20L50.99%2087.76%20L50.00%2087.71%20L49.01%2087.76%20L48.01%2087.91%20L47.00%2088.16%20L45.96%2088.48%20L44.88%2088.89%20L43.77%2089.34%20L42.62%2089.84%20L41.42%2090.37%20L40.18%2090.89%20L38.91%2091.40%20L37.60%2091.86%20L36.27%2092.27%20L34.91%2092.60%20L33.56%2092.83%20L32.21%2092.95%20L30.88%2092.95%20L29.58%2092.82%20L28.32%2092.54%20L27.13%2092.13%20L26.00%2091.57%20L24.95%2090.87%20L23.99%2090.05%20L23.13%2089.10%20L22.36%2088.04%20L21.70%2086.89%20L21.13%2085.66%20L20.65%2084.36%20L20.26%2083.03%20L19.95%2081.67%20L19.70%2080.30%20L19.50%2078.95%20L19.33%2077.61%20L19.19%2076.32%20L19.04%2075.07%20L18.88%2073.88%20L18.69%2072.75%20L18.46%2071.68%20L18.16%2070.68%20L17.79%2069.74%20L17.34%2068.86%20L16.80%2068.03%20L16.17%2067.24%20L15.45%2066.48%20L14.65%2065.74%20L13.76%2065.01%20L12.81%2064.28%20L11.80%2063.53%20L10.75%2062.75%20L9.68%2061.94%20L8.60%2061.09%20L7.54%2060.19%20L6.52%2059.24%20L5.56%2058.24%20L4.68%2057.18%20L3.90%2056.07%20L3.24%2054.91%20L2.71%2053.72%20L2.32%2052.50%20L2.08%2051.25%20L2.00%2050.00%20L2.08%2048.75%20L2.32%2047.50%20L2.71%2046.28%20L3.24%2045.09%20L3.90%2043.93%20L4.68%2042.82%20L5.56%2041.76%20L6.52%2040.76%20L7.54%2039.81%20L8.60%2038.91%20L9.68%2038.06%20L10.75%2037.25%20L11.80%2036.47%20L12.81%2035.72%20L13.76%2034.99%20L14.65%2034.26%20L15.45%2033.52%20L16.17%2032.76%20L16.80%2031.97%20L17.34%2031.14%20L17.79%2030.26%20L18.16%2029.32%20L18.46%2028.32%20L18.69%2027.25%20L18.88%2026.12%20L19.04%2024.93%20L19.19%2023.68%20L19.33%2022.39%20L19.50%2021.05%20L19.70%2019.70%20L19.95%2018.33%20L20.26%2016.97%20L20.65%2015.64%20L21.13%2014.34%20L21.70%2013.11%20L22.36%2011.96%20L23.13%2010.90%20L23.99%209.95%20L24.95%209.13%20L26.00%208.43%20L27.13%207.87%20L28.32%207.46%20L29.58%207.18%20L30.88%207.05%20L32.21%207.05%20L33.56%207.17%20L34.91%207.40%20L36.27%207.73%20L37.60%208.14%20L38.91%208.60%20L40.18%209.11%20L41.42%209.63%20L42.62%2010.16%20L43.77%2010.66%20L44.88%2011.11%20L45.96%2011.52%20L47.00%2011.84%20L48.01%2012.09%20L49.01%2012.24%20L50.00%2012.29%20L50.99%2012.24%20L51.99%2012.09%20L53.00%2011.84%20L54.04%2011.52%20L55.12%2011.11%20L56.23%2010.66%20L57.38%2010.16%20L58.58%209.63%20L59.82%209.11%20L61.09%208.60%20L62.40%208.14%20L63.73%207.73%20L65.09%207.40%20L66.44%207.17%20L67.79%207.05%20L69.12%207.05%20L70.42%207.18%20L71.68%207.46%20L72.87%207.87%20L74.00%208.43%20L75.05%209.13%20L76.01%209.95%20L76.87%2010.90%20L77.64%2011.96%20L78.30%2013.11%20L78.87%2014.34%20L79.35%2015.64%20L79.74%2016.97%20L80.05%2018.33%20L80.30%2019.70%20L80.50%2021.05%20L80.67%2022.39%20L80.81%2023.68%20L80.96%2024.93%20L81.12%2026.12%20L81.31%2027.25%20L81.54%2028.32%20L81.84%2029.32%20L82.21%2030.26%20L82.66%2031.14%20L83.20%2031.97%20L83.83%2032.76%20L84.55%2033.52%20L85.35%2034.26%20L86.24%2034.99%20L87.19%2035.72%20L88.20%2036.47%20L89.25%2037.25%20L90.32%2038.06%20L91.40%2038.91%20L92.46%2039.81%20L93.48%2040.76%20L94.44%2041.76%20L95.32%2042.82%20L96.10%2043.93%20L96.76%2045.09%20L97.29%2046.28%20L97.68%2047.50%20L97.92%2048.75Z%27/%3E%3C/svg%3E");
+  --shape-burst: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M98.00%2050.00%20L97.87%2051.25%20L97.50%2052.49%20L96.91%2053.69%20L96.17%2054.85%20L95.32%2055.97%20L94.45%2057.04%20L93.63%2058.09%20L92.91%2059.12%20L92.34%2060.16%20L91.95%2061.24%20L91.75%2062.37%20L91.72%2063.56%20L91.83%2064.81%20L92.02%2066.13%20L92.23%2067.49%20L92.41%2068.88%20L92.47%2070.26%20L92.38%2071.59%20L92.08%2072.85%20L91.57%2074.00%20L90.83%2075.02%20L89.89%2075.90%20L88.78%2076.65%20L87.56%2077.29%20L86.27%2077.83%20L84.98%2078.32%20L83.74%2078.82%20L82.60%2079.35%20L81.58%2079.97%20L80.71%2080.71%20L79.97%2081.58%20L79.35%2082.60%20L78.82%2083.74%20L78.32%2084.98%20L77.83%2086.27%20L77.29%2087.56%20L76.65%2088.78%20L75.90%2089.89%20L75.02%2090.83%20L74.00%2091.57%20L72.85%2092.08%20L71.59%2092.38%20L70.26%2092.47%20L68.88%2092.41%20L67.49%2092.23%20L66.13%2092.02%20L64.81%2091.83%20L63.56%2091.72%20L62.37%2091.75%20L61.24%2091.95%20L60.16%2092.34%20L59.12%2092.91%20L58.09%2093.63%20L57.04%2094.45%20L55.97%2095.32%20L54.85%2096.17%20L53.69%2096.91%20L52.49%2097.50%20L51.25%2097.87%20L50.00%2098.00%20L48.75%2097.87%20L47.51%2097.50%20L46.31%2096.91%20L45.15%2096.17%20L44.03%2095.32%20L42.96%2094.45%20L41.91%2093.63%20L40.88%2092.91%20L39.84%2092.34%20L38.76%2091.95%20L37.63%2091.75%20L36.44%2091.72%20L35.19%2091.83%20L33.87%2092.02%20L32.51%2092.23%20L31.12%2092.41%20L29.74%2092.47%20L28.41%2092.38%20L27.15%2092.08%20L26.00%2091.57%20L24.98%2090.83%20L24.10%2089.89%20L23.35%2088.78%20L22.71%2087.56%20L22.17%2086.27%20L21.68%2084.98%20L21.18%2083.74%20L20.65%2082.60%20L20.03%2081.58%20L19.29%2080.71%20L18.42%2079.97%20L17.40%2079.35%20L16.26%2078.82%20L15.02%2078.32%20L13.73%2077.83%20L12.44%2077.29%20L11.22%2076.65%20L10.11%2075.90%20L9.17%2075.02%20L8.43%2074.00%20L7.92%2072.85%20L7.62%2071.59%20L7.53%2070.26%20L7.59%2068.88%20L7.77%2067.49%20L7.98%2066.13%20L8.17%2064.81%20L8.28%2063.56%20L8.25%2062.37%20L8.05%2061.24%20L7.66%2060.16%20L7.09%2059.12%20L6.37%2058.09%20L5.55%2057.04%20L4.68%2055.97%20L3.83%2054.85%20L3.09%2053.69%20L2.50%2052.49%20L2.13%2051.25%20L2.00%2050.00%20L2.13%2048.75%20L2.50%2047.51%20L3.09%2046.31%20L3.83%2045.15%20L4.68%2044.03%20L5.55%2042.96%20L6.37%2041.91%20L7.09%2040.88%20L7.66%2039.84%20L8.05%2038.76%20L8.25%2037.63%20L8.28%2036.44%20L8.17%2035.19%20L7.98%2033.87%20L7.77%2032.51%20L7.59%2031.12%20L7.53%2029.74%20L7.62%2028.41%20L7.92%2027.15%20L8.43%2026.00%20L9.17%2024.98%20L10.11%2024.10%20L11.22%2023.35%20L12.44%2022.71%20L13.73%2022.17%20L15.02%2021.68%20L16.26%2021.18%20L17.40%2020.65%20L18.42%2020.03%20L19.29%2019.29%20L20.03%2018.42%20L20.65%2017.40%20L21.18%2016.26%20L21.68%2015.02%20L22.17%2013.73%20L22.71%2012.44%20L23.35%2011.22%20L24.10%2010.11%20L24.98%209.17%20L26.00%208.43%20L27.15%207.92%20L28.41%207.62%20L29.74%207.53%20L31.12%207.59%20L32.51%207.77%20L33.87%207.98%20L35.19%208.17%20L36.44%208.28%20L37.63%208.25%20L38.76%208.05%20L39.84%207.66%20L40.88%207.09%20L41.91%206.37%20L42.96%205.55%20L44.03%204.68%20L45.15%203.83%20L46.31%203.09%20L47.51%202.50%20L48.75%202.13%20L50.00%202.00%20L51.25%202.13%20L52.49%202.50%20L53.69%203.09%20L54.85%203.83%20L55.97%204.68%20L57.04%205.55%20L58.09%206.37%20L59.12%207.09%20L60.16%207.66%20L61.24%208.05%20L62.37%208.25%20L63.56%208.28%20L64.81%208.17%20L66.13%207.98%20L67.49%207.77%20L68.88%207.59%20L70.26%207.53%20L71.59%207.62%20L72.85%207.92%20L74.00%208.43%20L75.02%209.17%20L75.90%2010.11%20L76.65%2011.22%20L77.29%2012.44%20L77.83%2013.73%20L78.32%2015.02%20L78.82%2016.26%20L79.35%2017.40%20L79.97%2018.42%20L80.71%2019.29%20L81.58%2020.03%20L82.60%2020.65%20L83.74%2021.18%20L84.98%2021.68%20L86.27%2022.17%20L87.56%2022.71%20L88.78%2023.35%20L89.89%2024.10%20L90.83%2024.98%20L91.57%2026.00%20L92.08%2027.15%20L92.38%2028.41%20L92.47%2029.74%20L92.41%2031.12%20L92.23%2032.51%20L92.02%2033.87%20L91.83%2035.19%20L91.72%2036.44%20L91.75%2037.63%20L91.95%2038.76%20L92.34%2039.84%20L92.91%2040.88%20L93.63%2041.91%20L94.45%2042.96%20L95.32%2044.03%20L96.17%2045.15%20L96.91%2046.31%20L97.50%2047.51%20L97.87%2048.75Z%27/%3E%3C/svg%3E");
+  --shape-hexagon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M42.83%208.14%20Q50.00%204.00%2057.17%208.14%20L82.67%2022.86%20Q89.84%2027.00%2089.84%2035.28%20L89.84%2064.72%20Q89.84%2073.00%2082.67%2077.14%20L57.17%2091.86%20Q50.00%2096.00%2042.83%2091.86%20L17.33%2077.14%20Q10.16%2073.00%2010.16%2064.72%20L10.16%2035.28%20Q10.16%2027.00%2017.33%2022.86%20Z%27/%3E%3C/svg%3E");
+
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body { background: var(--night); }
+
+/* --- Hintergrund ---------------------------------------------------- */
+#bg {
+  position: fixed; inset: -30px;
+  background:
+    radial-gradient(ellipse 45% 60% at 95% 0%,   color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    radial-gradient(ellipse 45% 60% at 95% 100%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%),
+    linear-gradient(120deg, var(--night) 0%, var(--blue) 40%, var(--violet) 70%, var(--wine) 100%);
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+/* Hintergrundbild als eigene Ebene: erst ein winziges, unscharfes
+   Vorschaubild (sofort da), dann das echte Bild, sobald es fertig ist */
+#bg-img {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 250ms ease, filter 300ms ease;
+}
+#bg.has-image #bg-img { opacity: 1; }
+#bg.blurred { filter: blur(var(--bg-blur)); }
+#bg.has-image::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(8, 14, 24, var(--dim));
+}
+
+/* --- Glas-Grundstil ------------------------------------------------- */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shine), 0 10px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: var(--blur);
+}
+.muted { color: var(--muted); }
+
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* --- Obere Leiste --------------------------------------------------- */
+.topbar {
+  position: fixed; top: 20px; right: 20px;
+  display: flex; gap: 10px; align-items: center;
+}
+.icon-btn {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  transition: background 150ms ease, transform 300ms ease;
+}
+.icon-btn:hover { background: var(--glass-hover); }
+.icon-btn.spin:hover { transform: rotate(40deg); }
+.icon-btn.plain { background: none; border: none; box-shadow: none; backdrop-filter: none; }
+.icon-btn.plain:hover { transform: none; background: var(--glass-hover); }
+
+/* --- Mitte ---------------------------------------------------------- */
+.center {
+  height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0 24px 6vh;
+}
+
+/* Die Uhr ist das eine große Element: Farbverlauf Pink -> Teal,
+   passend zur Scrollbar */
+.clock {
+  margin: 0;
+  font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  font-weight: 250;
+  font-size: min(var(--clock-size, 160px), 22vw);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(100deg, var(--accent) 10%, var(--text) 50%, var(--teal) 90%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 24px color-mix(in srgb, var(--accent) 18%, transparent));
+  animation: rise 260ms cubic-bezier(.2, .9, .3, 1) both;
+  /* frei platziert: left/top = Mitte/Oberkante (per JS) */
+  position: fixed; z-index: 3; left: 50%; top: 5vh;
+  translate: -50% 0;
+  padding: 4px 14px; border-radius: 18px;
+  white-space: nowrap; user-select: none; touch-action: none;
+  cursor: grab;
+  outline: 1px dashed transparent; outline-offset: 2px;
+  transition: outline-color 150ms ease;
+}
+.clock:hover { outline-color: var(--glass-border); }
+.clock.dragging { cursor: grabbing; outline-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+/* fixiert: nicht anklickbar, nicht verschiebbar */
+.clock.locked { pointer-events: none; cursor: default; outline: none; }
+.greeting {
+  margin: 10px 0 34px;
+  font-size: 18px;
+  color: var(--muted);
+  animation: rise 260ms 30ms cubic-bezier(.2, .9, .3, 1) both;
+}
+.greeting strong { color: var(--text); font-weight: 600; }
+
+/* Suche */
+.search {
+  width: min(620px, 100%);
+  height: 54px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 18px;
+  border-radius: var(--r);
+  color: var(--muted);
+  transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  animation: rise 260ms 60ms cubic-bezier(.2, .9, .3, 1) both;
+}
+.search:focus-within {
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--glass-border));
+  box-shadow: var(--glass-shine), 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent), 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+.search input {
+  flex: 1; min-width: 0;
+  background: none; border: none; outline: none;
+  font: inherit; font-size: 16px; color: var(--text);
+}
+.search input::placeholder { color: var(--muted); }
+.search input::-webkit-search-cancel-button { display: none; }
+kbd {
+  font: inherit; font-size: 12px;
+  padding: 2px 7px; border-radius: 6px;
+  border: 1px solid var(--glass-border);
+}
+.search:focus-within kbd { visibility: hidden; }
+
+/* Kacheln ------------------------------------------------------------ */
+.links { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+         max-width: 100%; animation: rise 260ms 90ms cubic-bezier(.2, .9, .3, 1) both; }
+
+.cat-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.cat-tabs:empty { display: none; }
+.cat-tab {
+  height: 32px; padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: none; color: var(--muted); font-size: 13px;
+  transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.cat-tab:hover { background: var(--glass); color: var(--text); }
+.cat-tab[aria-selected="true"] {
+  color: var(--text);
+  background: var(--glass);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--glass-border));
+}
+
+/* Kacheln: Größe, Form, Stil ---------------------------------------- */
+.tiles {
+  --tile-w: 96px; --fav: 40px; --img: 22px; --shape: 64px; --shape-img: 28px;
+  --tile-pad: 16px 8px 12px; --tile-gap: 14px; --tile-font: 13px;
+  /* Stil (per JS gesetzt) */
+  --t-bg: rgba(255, 255, 255, 0.06);
+  --t-bg-hover: rgba(255, 255, 255, 0.11);
+  --t-border: rgba(255, 255, 255, 0.12);
+  --t-blur: 18px;
+  display: grid;
+  grid-template-columns: repeat(var(--per-row, 6), minmax(0, var(--tile-w)));
+  justify-content: center;
+  gap: var(--tile-gap);
+  max-width: min(100%, 1100px);
+}
+.tiles[data-size="xs"] { --tile-w: 56px;  --fav: 30px; --img: 16px; --shape: 42px; --shape-img: 20px; --tile-pad: 8px 4px;       --tile-gap: 8px;  --tile-font: 11px; }
+.tiles[data-size="s"]  { --tile-w: 76px;  --fav: 34px; --img: 19px; --shape: 52px; --shape-img: 24px; --tile-pad: 12px 6px 9px;  --tile-gap: 10px; --tile-font: 12px; }
+.tiles[data-size="l"]  { --tile-w: 124px; --fav: 54px; --img: 30px; --shape: 84px; --shape-img: 38px; --tile-pad: 20px 10px 14px; --tile-gap: 16px; --tile-font: 14px; }
+
+.tile {
+  min-width: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text);
+  font-size: var(--tile-font);
+  border: none; background: none; padding: 0; font-family: inherit; cursor: pointer;
+  transition: transform 150ms ease;
+}
+.tile:hover { transform: translateY(-3px); }
+.tile .name { max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.tiles.no-names .tile .name { display: none; }
+.tile .fav { display: grid; place-items: center; flex: none; }
+.tile .fav .letter { font-weight: 600; }
+
+/* Form "Karte": ganze Kachel ist die Glasfläche (wie bisher) */
+.tiles[data-shape="card"] .tile {
+  padding: var(--tile-pad);
+  border-radius: var(--r);
+  background: var(--t-bg);
+  border: 1px solid var(--t-border);
+  backdrop-filter: blur(var(--t-blur)) saturate(1.3);
+  box-shadow: var(--glass-shine);
+  transition: transform 150ms ease, background 150ms ease, border-color 150ms ease;
+}
+.tiles[data-shape="card"][data-size="xs"] .tile { border-radius: 12px; gap: 5px; }
+.tiles[data-shape="card"] .tile:hover {
+  background: var(--t-bg-hover);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border));
+}
+.tiles[data-shape="card"] .tile .fav {
+  width: var(--fav); height: var(--fav);
+  border-radius: calc(var(--fav) * 0.3);
+  background: rgba(255, 255, 255, 0.07);
+}
+.tiles[data-shape="card"] .tile .fav img { width: var(--img); height: var(--img); }
+.tiles[data-shape="card"] .tile .fav .letter { font-size: calc(var(--img) * 0.8); }
+.tiles.no-names[data-shape="card"] .tile { gap: 0; }
+
+/* alle anderen Formen: die FORM ist die Glasfläche, Name darunter */
+.tiles:not([data-shape="card"]) .tile .fav {
+  width: var(--shape); height: var(--shape);
+  background: linear-gradient(rgba(255, 255, 255, 0.06), transparent 60%), var(--t-bg);
+  backdrop-filter: blur(var(--t-blur)) saturate(1.3);
+  transition: background 150ms ease, box-shadow 150ms ease;
+}
+.tiles:not([data-shape="card"]) .tile:hover .fav { background: linear-gradient(rgba(255, 255, 255, 0.08), transparent 60%), var(--t-bg-hover); }
+.tiles:not([data-shape="card"]) .tile .fav img { width: var(--shape-img); height: var(--shape-img); }
+.tiles:not([data-shape="card"]) .tile .fav .letter { font-size: calc(var(--shape-img) * 0.75); }
+
+/* Kreis & Squircle behalten einen echten Rahmen */
+.tiles[data-shape="circle"] .tile .fav,
+.tiles[data-shape="squircle"] .tile .fav { border: 1px solid var(--t-border); box-shadow: var(--glass-shine); }
+.tiles[data-shape="circle"] .tile .fav   { border-radius: 50%; }
+.tiles[data-shape="squircle"] .tile .fav { border-radius: 32%; }
+.tiles[data-shape="circle"] .tile:hover .fav,
+.tiles[data-shape="squircle"] .tile:hover .fav { border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border)); }
+
+/* Masken-Formen */
+.tiles[data-shape="cloud"]   .tile .fav { mask: var(--shape-cloud)   center / 100% 100% no-repeat; }
+.tiles[data-shape="clover"]  .tile .fav { mask: var(--shape-clover)  center / 100% 100% no-repeat; }
+.tiles[data-shape="flower"]  .tile .fav { mask: var(--shape-flower)  center / 100% 100% no-repeat; }
+.tiles[data-shape="burst"]   .tile .fav { mask: var(--shape-burst)   center / 100% 100% no-repeat; }
+.tiles[data-shape="hexagon"] .tile .fav { mask: var(--shape-hexagon) center / 100% 100% no-repeat; }
+
+/* "+"-Kachel */
+.tile.add { color: var(--muted); }
+.tile.add .fav .letter { font-weight: 300; }
+.tiles[data-shape="card"] .tile.add { background: transparent; border-style: dashed; backdrop-filter: none; box-shadow: none; }
+.tiles:not([data-shape="card"]) .tile.add .fav { background: rgba(255, 255, 255, 0.03); }
+.tile.add:hover { color: var(--text); }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- Einstellungen -------------------------------------------------- */
+.scrim { position: fixed; inset: 0; z-index: 20; background: rgba(0, 0, 0, 0.3); }
+.panel {
+  position: fixed; top: 12px; right: 12px; bottom: 12px; z-index: 21;
+  width: min(380px, calc(100vw - 24px));
+  padding: 18px 20px 24px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--accent) 60%, transparent) transparent;
+  transform: translateX(calc(100% + 24px));
+  visibility: hidden;
+  transition: transform 280ms cubic-bezier(.2, .9, .3, 1), visibility 0s linear 280ms;
+}
+.panel.open { transform: none; visibility: visible; transition: transform 280ms cubic-bezier(.2, .9, .3, 1), visibility 0s; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; }
+.panel h2 { margin: 0; font-size: 20px; font-weight: 600; }
+.panel section { padding: 18px 0 4px; border-top: 1px solid var(--glass-border); margin-top: 14px; }
+.panel h3 { margin: 0 0 12px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.row { display: flex; gap: 8px; margin-bottom: 10px; }
+.row > input { flex: 1; min-width: 0; }
+.hint { font-size: 12px; margin: -4px 0 8px; min-height: 1em; }
+
+.panel input[type="text"] {
+  height: 38px; padding: 0 12px;
+  border-radius: var(--r-small);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text); font: inherit; font-size: 14px;
+}
+.panel input[type="text"]:focus { outline: none; border-color: color-mix(in srgb, var(--accent) 60%, var(--glass-border)); }
+.panel input[type="range"] { accent-color: var(--accent); }
+.panel input[type="checkbox"] { accent-color: var(--accent); }
+
+.btn {
+  height: 38px; padding: 0 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: var(--r-small);
+  border: 1px solid color-mix(in srgb, var(--accent) 50%, var(--glass-border));
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  font-size: 14px; white-space: nowrap;
+  transition: background 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 24%, transparent); }
+.btn.ghost { border-color: var(--glass-border); background: var(--glass); }
+.btn.ghost:hover { background: var(--glass-hover); }
+.btn.wide { width: 100%; }
+.btn.file { cursor: pointer; }
+
+.tile-list { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.tile-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 6px 6px 10px;
+  border-radius: var(--r-small);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 14px;
+}
+.tile-list .t-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile-list .t-url { color: var(--muted); font-size: 12px; }
+.tile-list button {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: none; background: none; color: var(--muted);
+}
+.tile-list button:hover { background: rgba(255, 138, 156, 0.2); color: #ff8a9c; }
+
+/* --- Widgets (frei verschiebbar) ------------------------------------ */
+#widget-layer { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+.widget {
+  position: absolute;
+  pointer-events: auto;
+  border-radius: var(--r);
+  background: color-mix(in srgb, var(--panel) 55%, transparent);
+  display: flex; flex-direction: column;
+  animation: pop 220ms cubic-bezier(.2, .9, .3, 1.1);
+}
+.widget.dragging {
+  box-shadow: var(--glass-shine), 0 22px 44px rgba(0, 0, 0, 0.45);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--glass-border));
+  z-index: 10;
+}
+.w-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 8px 6px 12px;
+  cursor: grab; user-select: none; touch-action: none;
+  font-size: 13px; color: var(--muted);
+}
+.widget.dragging .w-head { cursor: grabbing; }
+.w-head .grip { letter-spacing: -2px; opacity: 0.6; }
+.w-head .title { flex: 1; }
+.w-head button {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: none; background: none; color: var(--muted); font-size: 13px;
+}
+.w-head button:hover { background: rgba(255, 138, 156, 0.2); color: #ff8a9c; }
+
+/* Notizen */
+.note textarea {
+  width: 100%; min-width: 180px; min-height: 120px; height: 150px;
+  padding: 2px 14px 14px;
+  resize: both;
+  background: none; border: none; outline: none;
+  color: var(--text); font: inherit; font-size: 14px; line-height: 1.5;
+}
+.note textarea::placeholder { color: var(--muted); }
+.note { width: auto; }
+
+/* To-do */
+.todo { width: 260px; }
+.todo ul { list-style: none; margin: 0; padding: 0 8px; max-height: 280px; overflow-y: auto; scrollbar-width: thin; }
+.todo li { display: flex; align-items: center; gap: 8px; padding: 5px 4px; font-size: 14px; border-radius: 8px; }
+.todo li:hover { background: rgba(255, 255, 255, 0.04); }
+.todo li input { accent-color: var(--accent); }
+.todo li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.todo li.done span { text-decoration: line-through; color: var(--muted); }
+.todo li button { width: 22px; height: 22px; border-radius: 50%; border: none; background: none; color: var(--muted); opacity: 0; }
+.todo li:hover button { opacity: 1; }
+.todo li button:hover { color: #ff8a9c; background: rgba(255, 138, 156, 0.2); }
+.todo form { padding: 6px 12px 12px; }
+.todo form input {
+  width: 100%; height: 34px; padding: 0 10px;
+  border-radius: var(--r-small);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text); font: inherit; font-size: 13px; outline: none;
+}
+.todo form input:focus { border-color: color-mix(in srgb, var(--accent) 60%, var(--glass-border)); }
+.todo .empty { padding: 4px 12px; font-size: 13px; color: var(--muted); }
+
+/* Knopf "Neue Notiz" */
+.fab {
+  position: fixed; left: 20px; bottom: 20px; z-index: 6;
+  height: 42px; padding: 0 16px 0 12px;
+  display: flex; align-items: center; gap: 6px;
+  border-radius: 999px; font-size: 14px;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+.fab:hover { background: var(--glass-hover); border-color: color-mix(in srgb, var(--accent) 50%, var(--glass-border)); }
+
+@keyframes pop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: none; } }
+
+/* --- Schnellzugriff frei verschiebbar -------------------------------- */
+.links { position: relative; }
+.links-grip {
+  display: none;
+  position: absolute; left: -30px; top: 50%; transform: translateY(-50%);
+  width: 22px; height: 44px;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--muted); letter-spacing: -2px; font-size: 13px;
+  cursor: grab; user-select: none; touch-action: none;
+  opacity: 0; transition: opacity 150ms ease, background 150ms ease;
+}
+/* frei: Position = Mitte des Blocks (left ist die Mitte, deshalb -50 %);
+   links und rechts gleich viel Innenabstand, damit die Kacheln selbst
+   genau mittig sitzen */
+.links.free { position: fixed; z-index: 4; margin: 0; padding: 10px 34px; border-radius: var(--r);
+              animation: none; translate: -50% 0; }
+
+/* Einrast-Hilfslinien */
+.snap-guide { position: fixed; z-index: 3; pointer-events: none; opacity: 0; transition: opacity 120ms ease; }
+.snap-guide.on { opacity: 1; }
+.snap-guide.v { top: 0; bottom: 0; left: 50%; width: 0; border-left: 1px dashed var(--accent);
+                box-shadow: 0 0 8px var(--accent); }
+.snap-guide.h { left: 0; right: 0; top: 50%; height: 0; border-top: 1px dashed var(--teal);
+                box-shadow: 0 0 8px var(--teal); }
+.links.free .links-grip { display: grid; left: 4px; }
+.links.free:hover .links-grip, .links.free.dragging .links-grip { opacity: 1; }
+.links-grip:hover { background: var(--glass-hover); }
+.links.free.dragging { outline: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); }
+.links.free.dragging .links-grip { cursor: grabbing; }
+
+/* --- Zahnrad nur beim Drüberfahren ---------------------------------- */
+body.gear-hover .topbar { top: 0; right: 0; padding: 20px 20px 30px 40px; }
+body.gear-hover #open-settings { opacity: 0; transition: opacity 200ms ease, background 150ms ease, transform 300ms ease; }
+body.gear-hover .topbar:hover #open-settings,
+body.gear-hover #open-settings:focus-visible { opacity: 1; }
+
+/* --- Bedienelemente im Einstellungs-Panel --------------------------- */
+/* Farbwahl: Farbfeld + Hex-Eingabe */
+.color-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.color-row .c-label { flex: 1; font-size: 14px; }
+.color-row input[type="color"] {
+  width: 38px; height: 38px; padding: 0; flex: none;
+  border: 1px solid var(--glass-border); border-radius: var(--r-small);
+  background: none; cursor: pointer;
+}
+.color-row input[type="color"]::-moz-color-swatch { border: none; border-radius: 8px; }
+.color-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 3px; }
+.color-row input[type="color"]::-webkit-color-swatch { border: none; border-radius: 7px; }
+.panel .color-row input.hex {
+  width: 104px; flex: none;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; text-transform: lowercase;
+}
+.panel .color-row input.hex.invalid { border-color: #ff8a9c; }
+.color-preview {
+  height: 10px; border-radius: 999px; margin: 2px 0 12px;
+  background: linear-gradient(90deg, var(--accent), var(--text), var(--teal));
+}
+
+/* eigenes Dropdown im Glas-Stil */
+.dropdown { position: relative; flex: 1; min-width: 0; }
+.dd-btn {
+  width: 100%; height: 38px; padding: 0 10px 0 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  border-radius: var(--r-small);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 14px; text-align: left;
+  transition: border-color 150ms ease;
+}
+.dd-btn:hover, .dd-btn[aria-expanded="true"] { border-color: color-mix(in srgb, var(--accent) 50%, var(--glass-border)); }
+.dd-btn svg { color: var(--muted); transition: transform 180ms ease; flex: none; }
+.dd-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.dd-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dd-list {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 5;
+  margin: 0; padding: 5px; list-style: none;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 94%, transparent);
+  max-height: 240px; overflow-y: auto; scrollbar-width: thin;
+  animation: pop 160ms cubic-bezier(.2, .9, .3, 1.1);
+  transform-origin: top center;
+}
+.dd-list li {
+  padding: 8px 10px; border-radius: 8px;
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.dd-list li:hover, .dd-list li.active { background: var(--glass-hover); }
+.dd-list li[aria-selected="true"] { color: var(--accent); }
+.dd-list li[aria-selected="true"]::after { content: "✓"; font-size: 13px; }
+
+/* Formen-Auswahl */
+.shape-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.shape-grid button {
+  height: 64px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border-radius: var(--r-small);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 11px; color: var(--muted);
+}
+.shape-grid button:hover { color: var(--text); background: var(--glass-hover); }
+.shape-grid button[aria-pressed="true"] {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--glass-border));
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.shape-grid .preview { width: 26px; height: 26px; background: var(--text); opacity: 0.85; }
+.shape-grid .preview.card     { width: 30px; height: 24px; border-radius: 6px; }
+.shape-grid .preview.circle   { border-radius: 50%; }
+.shape-grid .preview.squircle { border-radius: 32%; }
+.shape-grid .preview.cloud    { mask: var(--shape-cloud)   center / 100% 100% no-repeat; }
+.shape-grid .preview.clover   { mask: var(--shape-clover)  center / 100% 100% no-repeat; }
+.shape-grid .preview.flower   { mask: var(--shape-flower)  center / 100% 100% no-repeat; }
+.shape-grid .preview.burst    { mask: var(--shape-burst)   center / 100% 100% no-repeat; }
+.shape-grid .preview.hexagon  { mask: var(--shape-hexagon) center / 100% 100% no-repeat; }
+
+/* eigenes Icon pro Kachel */
+.icon-row { align-items: center; }
+.icon-row .hint { flex: 1; margin: 0; }
+.icon-pick { cursor: pointer; flex: none; }
+.icon-prev, .tile-list .t-icon {
+  width: 38px; height: 38px; flex: none;
+  display: grid; place-items: center;
+  border-radius: var(--r-small);
+  border: 1px dashed var(--glass-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted); font-size: 16px; overflow: hidden;
+}
+.icon-prev img, .tile-list .t-icon img { width: 22px; height: 22px; object-fit: contain; }
+.icon-pick:hover .icon-prev, .tile-list .t-icon:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--glass-border)); color: var(--text); }
+.tile-list .t-icon { width: 28px; height: 28px; border-radius: 8px; cursor: pointer; padding: 0; }
+.tile-list .t-icon img { width: 18px; height: 18px; }
+.tile-list .t-icon.custom { border-style: solid; border-color: color-mix(in srgb, var(--accent) 45%, var(--glass-border)); }
+.icon-clear, .tile-list .t-icon-reset {
+  width: 28px; height: 28px; border-radius: 50%; border: none; background: none; color: var(--muted); flex: none;
+}
+.icon-clear:hover, .tile-list .t-icon-reset:hover { background: rgba(255, 138, 156, 0.2); color: #ff8a9c; }
+.tile-list .t-icon-reset { width: 22px; height: 22px; font-size: 11px; }
+
+.btn.shortcut {
+  flex: 1; justify-content: flex-start;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 13px;
+}
+.btn.shortcut.recording { border-color: var(--accent); color: var(--accent); animation: blink 1.2s ease-in-out infinite; }
+@keyframes blink { 50% { border-color: transparent; } }
+.hint.warn { color: #ffb4c0; }
+.version {
+  margin: 22px 0 0; padding-top: 14px;
+  border-top: 1px solid var(--glass-border);
+  text-align: center; font-size: 12px; color: var(--muted);
+  font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+}
+#s-toastpos button { font-size: 16px; }
+
+/* Sortieren: Kacheln auf der Seite */
+.tile { position: relative; }
+.tile.dragging { opacity: 0.35; }
+.tile.drop-before::after, .tile.drop-after::after {
+  content: ""; position: absolute; top: 12%; bottom: 12%; width: 3px;
+  border-radius: 3px; background: var(--accent); box-shadow: 0 0 8px var(--accent);
+}
+.tile.drop-before::after { left: calc(var(--tile-gap) / -2 - 1.5px); }
+.tile.drop-after::after  { right: calc(var(--tile-gap) / -2 - 1.5px); }
+
+/* Sortieren: Einträge in den Einstellungen */
+.tile-list li { position: relative; }
+.tile-list li.dragging { opacity: 0.4; }
+.tile-list li.drop-before { box-shadow: inset 0 2px 0 var(--accent); }
+.tile-list li.drop-after  { box-shadow: inset 0 -2px 0 var(--accent); }
+.tile-list .t-grip {
+  flex: none; cursor: grab; color: var(--muted); opacity: 0.6;
+  letter-spacing: -2px; font-size: 12px; user-select: none;
+}
+.tile-list li:hover .t-grip { opacity: 1; }
+.tile-list .t-move { display: flex; flex: none; }
+.tile-list .t-move button { width: 22px; height: 24px; border-radius: 6px; font-size: 12px; }
+.tile-list .t-move button:hover:not(:disabled) { background: var(--glass-hover); color: var(--text); }
+.tile-list .t-move button:disabled { opacity: 0.25; cursor: default; }
+.tile-list li { gap: 6px; padding-left: 6px; }
+.tile-list .t-url { max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Link-Liste mit An/Aus-Schalter */
+.tile-list li.off .t-name, .tile-list li.off .t-url { opacity: 0.45; }
+.tile-list .mini-switch {
+  appearance: none; flex: none;
+  width: 30px; height: 17px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  position: relative; cursor: pointer; margin: 0;
+  transition: background 150ms ease;
+}
+.tile-list .mini-switch::after {
+  content: ""; position: absolute; top: 2.5px; left: 3px;
+  width: 12px; height: 12px; border-radius: 50%; background: var(--text);
+  transition: transform 160ms ease;
+}
+.tile-list .mini-switch:checked { background: var(--accent); }
+.tile-list .mini-switch:checked::after { transform: translateX(12px); }
+.tile-list .empty-hint { color: var(--muted); font-size: 13px; padding: 4px 2px; background: none; }
+
+.segmented {
+  display: flex; padding: 3px; gap: 3px;
+  border-radius: var(--r-small);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+}
+.segmented button {
+  flex: 1; height: 30px;
+  border: none; border-radius: 7px;
+  background: none; color: var(--muted); font-size: 13px;
+}
+.segmented button:hover { color: var(--text); }
+.segmented button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.switch-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+.switch { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+          padding: 7px 0; font-size: 14px; cursor: pointer; margin-bottom: 6px; }
+.switch-list .switch { margin: 0; }
+.switch input {
+  order: 2; appearance: none; flex: none;
+  width: 36px; height: 20px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  position: relative; cursor: pointer;
+  transition: background 150ms ease;
+}
+.switch input::after {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--text);
+  transition: transform 180ms cubic-bezier(.2, .9, .3, 1.2);
+}
+.switch input:checked { background: var(--accent); }
+.switch input:checked::after { transform: translateX(16px); }
+
+.panel select {
+  flex: 1; min-width: 0; height: 38px; padding: 0 10px;
+  border-radius: var(--r-small);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text); font: inherit; font-size: 14px;
+}
+.panel select option { background: var(--panel); }
+.btn.danger:hover { background: rgba(255, 138, 156, 0.2); color: #ff8a9c; }
+.btn:disabled { opacity: 0.4; cursor: default; }
+.field b { color: var(--text); font-weight: 600; }
+.hidden { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ======================================================================
+   Settings panel – plain style (same look as Windrad Flow's settings)
+   The start page itself keeps its look; only the panel is quiet now.
+   ====================================================================== */
+#settings.panel {
+  --p-bg: #16171b; --p-surface: #1d1e23; --p-raised: #25262c;
+  --p-line: #2a2b32; --p-line-strong: #383a42; --p-text: #e6e6e9; --p-muted: #8d8f99;
+  top: 0; right: 0; bottom: 0; width: min(380px, 100vw);
+  padding: 16px 20px 24px; border-radius: 0;
+  background: var(--p-bg) !important; backdrop-filter: none !important;
+  border: 0; border-left: 1px solid var(--p-line-strong) !important; box-shadow: -16px 0 40px rgba(0, 0, 0, .35) !important;
+  color: var(--p-text); font-size: 13px;
+  scrollbar-color: var(--p-line-strong) transparent;
+}
+#settings.panel h2 { font-size: 15px; font-weight: 600; }
+#settings.panel section { border-top: 1px solid var(--p-line); padding: 14px 0 4px; margin-top: 14px; }
+#settings.panel h3 { color: var(--p-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+#settings.panel .field { color: var(--p-muted); font-size: 12px; }
+#settings.panel .muted, #settings.panel .hint { color: var(--p-muted); }
+#settings.panel input[type="text"], #settings.panel select, #settings.panel .hex {
+  height: 30px; border-radius: 6px; border: 1px solid var(--p-line-strong); background: var(--p-surface); color: var(--p-text); font-size: 13px;
+}
+#settings.panel input[type="text"]:focus, #settings.panel select:focus { border-color: var(--accent); outline: none; }
+#settings.panel .btn {
+  height: 30px; border-radius: 6px; font-size: 13px;
+  background: var(--p-raised); border: 1px solid var(--p-line-strong); color: var(--p-text);
+}
+#settings.panel .btn:hover { background: #2a2b32; border-color: #454751; }
+#settings.panel .btn.ghost { background: transparent; }
+#settings.panel .btn.ghost:hover { background: var(--p-surface); }
+#settings.panel .btn.danger:hover { color: #e5767f; }
+#settings.panel .segmented { background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 6px; padding: 2px; }
+#settings.panel .segmented button { border-radius: 4px; color: var(--p-muted); }
+#settings.panel .segmented button[aria-pressed="true"], #settings.panel .segmented button.active,
+#settings.panel .segmented button.on { background: var(--p-raised) !important; color: var(--p-text) !important; box-shadow: 0 0 0 1px var(--p-line-strong) !important; }
+#settings.panel .switch input, #settings.panel .switch-list input[type="checkbox"] { accent-color: var(--accent); }
+#settings.panel .color-preview { height: 4px; border-radius: 2px; }
+#settings.panel .icon-btn { border-radius: 6px; }
+#settings.panel .version { color: #5f616b; }

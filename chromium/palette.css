@@ -1,0 +1,80 @@
+/* =====================================================================
+   Windrad Flow – command bar (Ctrl + Space)
+   Plain: neutral dark box, thin lines, accent only on the selected row.
+   ===================================================================== */
+:root {
+  --bg: #16171b;
+  --surface: #1d1e23;
+  --raised: #25262c;
+  --line: #2a2b32;
+  --line-strong: #383a42;
+  --text: #e6e6e9;
+  --muted: #8d8f99;
+  --faint: #5f616b;
+  --accent: #ff7a95;
+  --teal: #4fe3e0;
+  color-scheme: dark;
+  font: 13px/1.4 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+
+/* floating in a page */
+#scrim { position: fixed; inset: 0; background: rgba(0, 0, 0, .4); animation: fade 120ms ease-out both; }
+#card {
+  position: fixed; left: 50%; top: 15vh; translate: -50% 0;
+  width: min(620px, calc(100vw - 32px)); max-height: 64vh;
+  display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 8px; background: var(--bg); border: 1px solid var(--line-strong);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .55);
+  animation: pop 140ms ease-out both;
+}
+body.closing #card { animation: out 100ms ease-in both; }
+body.closing #scrim { animation: fade 100ms ease-in reverse both; }
+
+/* toolbar popup (pages where Flow can't draw) */
+body.action { width: 600px; height: 500px; background: var(--bg); }
+body.action #scrim { display: none; }
+body.action #card { position: static; translate: none; width: 100%; max-height: none; height: 100%;
+                    border-radius: 0; border: 0; box-shadow: none; animation: none; }
+
+.field { flex: none; display: flex; align-items: center; gap: 10px; padding: 0 14px; height: 48px; border-bottom: 1px solid var(--line); }
+.search-ico { width: 16px; height: 16px; color: var(--muted); flex: none; }
+.search-ico svg { width: 100%; height: 100%; }
+#q { flex: 1; min-width: 0; height: 100%; background: none; border: 0; outline: none; color: var(--text); font: inherit; font-size: 15px; }
+#q::placeholder { color: var(--faint); }
+kbd { font: 10.5px ui-monospace, Consolas, monospace; padding: 1px 5px; border-radius: 3px; border: 1px solid var(--line-strong); color: var(--muted); }
+
+#list { position: relative; flex: 1; overflow-y: auto; padding: 4px 6px 6px; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.sec { padding: 10px 8px 4px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+.item { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 5px; cursor: pointer; position: relative; z-index: 1; }
+/* one highlight that moves to the selected row */
+.hl { position: absolute; left: 6px; right: 6px; top: 0; height: 0; z-index: 0; border-radius: 5px; background: var(--raised);
+      transition: transform 110ms ease, height 110ms ease; pointer-events: none; }
+.hl::before { content: ""; position: absolute; left: 0; top: 25%; bottom: 25%; width: 2px; border-radius: 2px; background: var(--accent); }
+.hl.jump { transition: none; }
+.item, .sec { animation: none; }
+
+.ico { width: 26px; height: 26px; flex: none; display: grid; place-items: center; border-radius: 4px; background: var(--surface); color: var(--muted); overflow: hidden; }
+.ico img { width: 16px; height: 16px; }
+.ico svg { width: 15px; height: 15px; }
+.ico .letter { font-size: 13px; color: var(--text); }
+.txt { flex: 1; min-width: 0; }
+.title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.title mark { background: none; color: var(--text); font-weight: 600; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.sub { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.badge { flex: none; font-size: 11px; color: var(--faint); }
+.item.sel .badge { color: var(--muted); }
+.empty { padding: 24px; text-align: center; color: var(--muted); }
+
+footer { flex: none; display: flex; gap: 14px; flex-wrap: wrap; padding: 8px 14px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--faint); }
+footer kbd { margin-right: 4px; }
+
+.toast { position: fixed; left: 50%; bottom: 16px; translate: -50% 0; padding: 8px 12px; border-radius: 6px; font-size: 12px;
+         background: var(--raised); border: 1px solid var(--line-strong); }
+
+@keyframes fade { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes out { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

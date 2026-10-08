@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Windrad Flow</title>
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="panel">
+    <header>
+      <img src="icons/icon.svg" alt="" width="40" height="40">
+      <h1 data-t="settingsTitle"></h1>
+    </header>
+    <div class="layout">
+      <nav id="nav" aria-label="Sections"></nav>
+      <div id="pages">
+
+    <section id="sec-general">
+      <h2 data-t="general"></h2>
+      <div class="field"><span data-t="language"></span>
+        <div class="segmented" id="lang">
+          <button type="button" data-value="en">English</button>
+          <button type="button" data-value="de">Deutsch</button>
+        </div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-current"><span id="theme-swatch" class="swatch"></span><span><b id="theme-name"></b><span class="muted small" data-t="themeHint"></span></span></div>
+        <button id="theme-open" class="btn" type="button" data-t="chooseTheme"></button>
+      </div>
+      <div class="color-row"><span data-t="color1"></span>
+        <input id="color1" type="color"><input id="color1-hex" class="hex" type="text" maxlength="7" spellcheck="false"></div>
+      <div class="color-row"><span data-t="color2"></span>
+        <input id="color2" type="color"><input id="color2-hex" class="hex" type="text" maxlength="7" spellcheck="false"></div>
+      <div class="preview" aria-hidden="true"></div>
+      <button id="reset-colors" class="btn ghost" type="button" data-t="resetColors"></button>
+      <h3 data-t="shortcutsTitle"></h3>
+      <p class="muted small" data-t="shortcutsHint"></p>
+      <ul id="shortcut-list" class="list shortcuts"></ul>
+      <p id="shortcut-list-msg" class="muted small"></p>
+    </section>
+
+    <section id="sec-modules">
+      <h2 data-t="modules"></h2>
+      <p class="muted small" data-t="modulesHint"></p>
+      <div id="modules"></div>
+    </section>
+
+    <section id="sec-palette" data-module="palette">
+      <h2 data-t="paletteTitle"></h2>
+      <div class="field"><span data-t="shortcut"></span>
+        <div class="row">
+          <button id="shortcut" class="btn ghost mono grow" type="button"></button>
+          <button id="shortcut-reset" class="btn ghost" type="button" data-t="reset"></button>
+        </div>
+        <span id="shortcut-msg" class="muted small"></span>
+      </div>
+      <div class="field"><span data-t="openIn"></span>
+        <div class="segmented" id="openIn">
+          <button type="button" data-value="newtab" data-t="openNew"></button>
+          <button type="button" data-value="current" data-t="openCurrent"></button>
+        </div>
+        <span class="muted small" data-t="openInHint"></span>
+      </div>
+      <div class="field"><span data-t="sources"></span>
+        <label class="switch"><input id="src-tabs" type="checkbox"><span data-t="s_tabs"></span></label>
+        <label class="switch"><input id="src-bookmarks" type="checkbox"><span data-t="s_bookmarks"></span></label>
+        <label class="switch"><input id="src-history" type="checkbox"><span data-t="s_history"></span></label>
+      </div>
+      <label class="field"><span data-t="engine"></span>
+        <select id="engine">
+          <option value="https://www.google.com/search?q=%s">Google</option>
+          <option value="https://duckduckgo.com/?q=%s">DuckDuckGo</option>
+          <option value="https://www.startpage.com/do/search?q=%s">Startpage</option>
+          <option value="https://www.bing.com/search?q=%s">Bing</option>
+          <option value="https://www.ecosia.org/search?q=%s">Ecosia</option>
+        </select>
+      </label>
+      <p class="muted small" data-t="paletteHint"></p>
+    </section>
+
+    <section id="sec-archive" data-module="archive">
+      <h2 data-t="archiveTitle"></h2>
+      <label class="field"><span data-t="archiveAfter"></span>
+        <select id="archive-hours">
+          <option value="1" data-t="h1"></option><option value="3" data-t="h3"></option>
+          <option value="6" data-t="h6"></option><option value="12" data-t="h12"></option>
+          <option value="24" data-t="h24"></option><option value="48" data-t="h48"></option>
+          <option value="168" data-t="h168"></option>
+        </select>
+      </label>
+      <label class="switch"><input id="keep-audible" type="checkbox"><span data-t="keepAudible"></span></label>
+      <p class="muted small" data-t="archiveRules"></p>
+      <label class="field"><span data-t="exclude"></span>
+        <textarea id="exclude" rows="3" spellcheck="false"></textarea>
+        <span class="muted small" data-t="excludeHint"></span>
+      </label>
+      <h3 id="archive" data-t="archiveList"></h3>
+      <ul id="archive-list" class="list"></ul>
+      <button id="archive-clear" class="btn ghost danger" type="button" data-t="clearArchive"></button>
+    </section>
+
+    <section id="sec-spaces" data-module="spaces">
+      <h2 id="spaces" data-t="spacesTitle"></h2>
+      <p class="muted small" data-t="spacesHint"></p>
+      <ul id="space-list" class="list spaces"></ul>
+      <button id="space-add" class="btn" type="button" data-t="addSpace"></button>
+      <p class="muted small" data-t="spaceShortcuts"></p>
+      <label class="switch"><input id="spaces-adv" type="checkbox"><span data-t="advanced"></span></label>
+      <p id="spaces-adv-hint" class="muted small" data-t="containerHint"></p>
+    </section>
+
+    <section id="sec-player" data-module="player">
+      <h2 data-t="playerTitle"></h2>
+      <p class="muted small" data-t="playerHint"></p>
+      <div class="field"><span data-t="plStyle"></span>
+        <div class="segmented" id="player-style">
+          <button type="button" data-value="tiny" data-t="plTiny"></button>
+          <button type="button" data-value="minimal" data-t="plMinimal"></button>
+          <button type="button" data-value="standard" data-t="plStandard"></button>
+        </div>
+      </div>
+      <label class="field"><span data-t="plColors"></span>
+        <select id="player-colors"></select>
+        <span class="muted small" data-t="plColorsHint"></span>
+      </label>
+      <label class="switch"><input id="player-glass" type="checkbox"><span data-t="y_glass"></span></label>
+      <label class="switch"><input id="player-video" type="checkbox"><span data-t="plVideo"></span></label>
+      <div class="field" id="player-videomode-row"><span data-t="plVideoMode"></span>
+        <div class="segmented" id="player-videomode">
+          <button type="button" data-value="pip" data-t="plPip"></button>
+          <button type="button" data-value="window" data-t="plWin"></button>
+        </div>
+        <span class="muted small" data-t="plVideoModeHint"></span>
+      </div>
+      <div class="field"><span data-t="playerPos"></span>
+        <div class="segmented" id="player-pos">
+          <button type="button" data-value="left" data-t="posLeft"></button>
+          <button type="button" data-value="right" data-t="posRight"></button>
+        </div>
+        <span class="muted small" data-t="plDragHint"></span>
+      </div>
+      <button id="player-reset-pos" class="btn ghost" type="button" data-t="plResetPos"></button>
+      <h3 data-t="plPipTitle"></h3>
+      <p class="muted small" data-t="plPipHint"></p>
+    </section>
+
+    <section id="sec-notes" data-module="notes">
+      <h2 data-t="notesTitle"></h2>
+      <p class="muted small" data-t="notesHint"></p>
+      <label class="switch"><input id="notes-auto" type="checkbox"><span data-t="autoOpen"></span></label>
+      <h3 data-t="notesList"></h3>
+      <ul id="notes-list" class="list"></ul>
+    </section>
+
+    <section id="sec-boosts" data-module="boosts">
+      <h2 data-t="boostsTitle"></h2>
+      <p class="muted small" data-t="boostsHint"></p>
+      <h3 data-t="darkTitle"></h3>
+      <label class="switch"><input id="dark-all" type="checkbox"><span data-t="darkAll"></span></label>
+      <p class="muted small" data-t="darkAllHint"></p>
+      <div class="dark-grid">
+        <div class="dark-controls">
+          <label class="field slider"><span><span data-t="dkDarkness"></span> <b id="dk-darkness-val"></b></span>
+            <input id="dk-darkness" type="range" min="0" max="100" step="1"></label>
+          <label class="field slider"><span><span data-t="dkBrightness"></span> <b id="dk-brightness-val"></b></span>
+            <input id="dk-brightness" type="range" min="50" max="150" step="1"></label>
+          <label class="field slider"><span><span data-t="dkContrast"></span> <b id="dk-contrast-val"></b></span>
+            <input id="dk-contrast" type="range" min="50" max="150" step="1"></label>
+          <label class="field slider"><span><span data-t="dkSepia"></span> <b id="dk-sepia-val"></b></span>
+            <input id="dk-sepia" type="range" min="0" max="100" step="1"></label>
+          <label class="field slider"><span><span data-t="dkGray"></span> <b id="dk-grayscale-val"></b></span>
+            <input id="dk-grayscale" type="range" min="0" max="100" step="1"></label>
+          <div class="field"><span data-t="dkText"></span>
+            <div class="segmented" id="dk-text">
+              <button type="button" data-value="original" data-t="dkTOriginal"></button>
+              <button type="button" data-value="soft" data-t="dkTSoft"></button>
+              <button type="button" data-value="white" data-t="dkTWhite"></button>
+              <button type="button" data-value="warm" data-t="dkTWarm"></button>
+              <button type="button" data-value="accent" data-t="dkTAccent"></button>
+              <button type="button" data-value="custom" data-t="dkTCustom"></button>
+            </div>
+          </div>
+          <div class="color-row" id="dk-custom-row"><span data-t="dkTCustomColor"></span>
+            <input id="dk-textcolor" type="color"><input id="dk-textcolor-hex" class="hex" type="text" maxlength="7" spellcheck="false"></div>
+          <label class="switch"><input id="dk-textondark" type="checkbox"><span data-t="dkTextOnDark"></span></label>
+          <div class="row" style="margin-top:12px"><button id="dk-reset" class="btn ghost" type="button" data-t="dkReset"></button></div>
+        </div>
+        <div class="dark-preview-wrap">
+          <span class="muted small" data-t="dkPreview"></span>
+          <div class="dark-preview" id="dk-preview">
+            <div class="dp-page">
+              <div class="dp-bar"></div>
+              <div class="dp-h">Lorem ipsum</div>
+              <div class="dp-t">Dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</div>
+              <div class="dp-img"></div>
+              <div class="dp-t"><span class="dp-link">Link</span> · Ut enim ad minim veniam.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="muted small" data-t="darkTip"></p>
+      <h3 data-t="boostsList"></h3>
+      <ul id="boosts-list" class="list"></ul>
+    </section>
+
+    <section id="sec-youtube" data-module="youtube">
+      <h2 id="youtube" data-t="ytTitle"></h2>
+      <p class="muted small" data-t="ytHint"></p>
+      <h3 data-t="ytHide"></h3>
+      <div id="yt-hide"></div>
+      <h3 data-t="ytPlayback"></h3>
+      <label class="field"><span data-t="y_quality"></span>
+        <select id="yt-quality">
+          <option value="auto" data-t="y_qAuto"></option>
+          <option value="4320">4320p (8K)</option><option value="2160">2160p (4K)</option>
+          <option value="1440">1440p</option><option value="1080">1080p</option><option value="720">720p</option>
+          <option value="480">480p</option><option value="360">360p</option>
+        </select>
+        <span class="muted small" data-t="y_qHint"></span>
+      </label>
+      <label class="switch"><input id="yt-startvol" type="checkbox"><span data-t="y_startVol"></span></label>
+      <label class="field" id="yt-startvol-row"><span><b id="yt-startvol-val"></b></span>
+        <input id="yt-startvol-range" type="range" min="0" max="100" step="1">
+        <span class="muted small" data-t="y_startVolHint"></span>
+      </label>
+      <label class="switch"><input id="yt-wheel" type="checkbox"><span data-t="y_wheel"></span></label>
+      <label class="field" id="yt-step-row"><span data-t="y_step"></span>
+        <select id="yt-step"><option value="2">2 %</option><option value="5">5 %</option><option value="10">10 %</option></select>
+        <span class="muted small" data-t="y_wheelHint"></span>
+      </label>
+      <h3 data-t="ytDesign"></h3>
+      <label class="switch"><input id="yt-colors" type="checkbox"><span data-t="y_colors"></span></label>
+      <div id="yt-design">
+        <label class="field"><span data-t="y_preset"></span><select id="yt-preset"></select></label>
+        <div id="yt-swatches"></div>
+        <label class="switch"><input id="yt-gradient" type="checkbox"><span data-t="y_gradient"></span></label>
+        <div class="row" style="margin:10px 0 4px"><button id="yt-theme-open" class="btn" type="button" data-t="chooseTheme"></button></div>
+        <label class="switch"><input id="yt-glass" type="checkbox"><span data-t="y_glass"></span></label>
+      </div>
+    </section>
+
+    <section id="sec-volume" data-module="volume">
+      <h2 data-t="volTitle"></h2>
+      <p class="muted small" data-t="volHint"></p>
+      <label class="switch"><input id="vol-remember" type="checkbox"><span data-t="volRemember"></span></label>
+    </section>
+
+    <section id="sec-peek" data-module="peek">
+      <h2 data-t="peekTitle"></h2>
+      <p class="muted small" data-t="peekHint"></p>
+      <div class="field"><span data-t="pkMode"></span>
+        <div class="segmented" id="peek-mode">
+          <button type="button" data-value="overlay" data-t="pkOverlay"></button>
+          <button type="button" data-value="popup" data-t="pkPopup"></button>
+        </div>
+        <span class="muted small" data-t="pkModeHint"></span>
+      </div>
+      <div class="field"><span data-t="pkTrigger"></span>
+        <div class="segmented" id="peek-trigger">
+          <button type="button" data-value="alt">Alt + Click</button>
+          <button type="button" data-value="alt+shift">Alt + Shift + Click</button>
+          <button type="button" data-value="ctrl+alt">Ctrl + Alt + Click</button>
+        </div>
+      </div>
+      <h3 data-t="pkSize"></h3>
+      <label class="field"><span><span data-t="pkWidth"></span>: <b id="peek-width-val"></b></span>
+        <input id="peek-width" type="range" min="50" max="98" step="1"></label>
+      <label class="field"><span><span data-t="pkHeight"></span>: <b id="peek-height-val"></b></span>
+        <input id="peek-height" type="range" min="50" max="98" step="1"></label>
+      <div id="peek-overlay">
+        <label class="switch"><input id="peek-useLogin" type="checkbox"><span data-t="pkUseLogin"></span></label>
+        <label class="switch"><input id="peek-dim" type="checkbox"><span data-t="pkDim"></span></label>
+        <label class="switch"><input id="peek-blur" type="checkbox"><span data-t="pkBlur"></span></label>
+        <label class="switch"><input id="peek-outside" type="checkbox"><span data-t="pkOutside"></span></label>
+      </div>
+      <div id="peek-popup">
+        <div class="segmented" id="peek-kind">
+          <button type="button" data-value="full" data-t="pkKindFull"></button>
+          <button type="button" data-value="slim" data-t="pkKindSlim"></button>
+        </div>
+        <label class="switch"><input id="peek-closeOnBlur" type="checkbox"><span data-t="pkCloseOnBlur"></span></label>
+      </div>
+      <label class="field"><span data-t="engine"></span>
+        <select id="peek-engine">
+          <option value="https://www.google.com/search?q=%s">Google</option>
+          <option value="https://duckduckgo.com/?q=%s">DuckDuckGo</option>
+          <option value="https://www.startpage.com/do/search?q=%s">Startpage</option>
+          <option value="https://www.bing.com/search?q=%s">Bing</option>
+          <option value="https://www.ecosia.org/search?q=%s">Ecosia</option>
+          <option value="https://www.youtube.com/results?search_query=%s">YouTube</option>
+        </select>
+      </label>
+    </section>
+
+    <section id="sec-backup">
+      <h2 data-t="backup"></h2>
+      <p class="muted small" data-t="backupHint"></p>
+      <div class="row">
+        <button id="export" class="btn" type="button" data-t="export"></button>
+        <label class="btn ghost file"><span data-t="import"></span><input id="import" type="file" accept=".json,application/json" hidden></label>
+      </div>
+      <p id="backup-msg" class="muted small"></p>
+    </section>
+
+      </div>
+    </div>
+    <p id="saved" class="saved" aria-live="polite"></p>
+    <p id="version" class="version"></p>
+  </main>
+  <div id="theme-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="theme-modal-title">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="theme-modal-title" data-t="themesTitle"></h2>
+        <button id="theme-close" class="icon-btn" type="button">✕</button>
+      </div>
+      <div id="theme-pick">
+        <h3 data-t="builtIn"></h3>
+        <div id="theme-grid-built" class="theme-grid"></div>
+        <h3 data-t="yourThemes"></h3>
+        <div id="theme-grid-own" class="theme-grid"></div>
+      </div>
+      <div id="theme-editor" class="hidden">
+        <h3 id="theme-editor-title"></h3>
+        <div class="editor">
+          <div class="editor-form">
+            <label class="field"><span data-t="themeName"></span><input id="te-name" type="text" maxlength="30"></label>
+            <div class="color-row"><span data-t="tAccent"></span><input id="te-accent" type="color"></div>
+            <div class="color-row"><span data-t="tSecond"></span><input id="te-second" type="color"></div>
+            <div class="color-row"><span data-t="tText"></span><input id="te-text" type="color"></div>
+            <div class="color-row"><span data-t="tStops"></span>
+              <input id="te-s0" type="color"><input id="te-s1" type="color"><input id="te-s2" type="color"><input id="te-s3" type="color"></div>
+          </div>
+          <div id="te-preview" class="theme-preview big"><i></i><i></i><b>Aa</b></div>
+        </div>
+        <div class="row editor-actions">
+          <button id="te-delete" class="btn ghost danger" type="button" data-t="deleteTheme"></button>
+          <span class="grow"></span>
+          <button id="te-cancel" class="btn ghost" type="button" data-t="cancel"></button>
+          <button id="te-save" class="btn primary" type="button" data-t="save"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

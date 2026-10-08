@@ -1,0 +1,178 @@
+{
+  "extDescription": {
+    "message": "Werkzeuge im Zen-/Arc-Stil für Chromium-Browser: Befehlsleiste, Startseite, Themes, Archiv, Notizen, Boosts & Dunkelmodus, YouTube, Lautstärke, Mini-Player und Link-Vorschau."
+  },
+  "cmdPalette": {
+    "message": "Befehlsleiste öffnen"
+  },
+  "cmdNote": {
+    "message": "Notiz zu dieser Seite"
+  },
+  "openNewTab": {
+    "message": "In neuem Tab öffnen"
+  },
+  "copyLink": {
+    "message": "Link kopieren"
+  },
+  "copied": {
+    "message": "Kopiert"
+  },
+  "close": {
+    "message": "Schließen (Esc)"
+  },
+  "loading": {
+    "message": "Lädt …"
+  },
+  "optTitle": {
+    "message": "Windrad Peek – Einstellungen"
+  },
+  "optAccess": {
+    "message": "Zugriff auf Websites"
+  },
+  "optAccessOk": {
+    "message": "Peek funktioniert auf allen Websites."
+  },
+  "optAccessMissing": {
+    "message": "Peek braucht Zugriff auf Websites, um Vorschauen zu zeigen."
+  },
+  "optGrant": {
+    "message": "Zugriff erlauben"
+  },
+  "optTrigger": {
+    "message": "Vorschau öffnen mit"
+  },
+  "optSize": {
+    "message": "Größe des Fensters"
+  },
+  "optWidth": {
+    "message": "Breite"
+  },
+  "optHeight": {
+    "message": "Höhe"
+  },
+  "optDim": {
+    "message": "Seite dahinter abdunkeln"
+  },
+  "optBlur": {
+    "message": "Seite dahinter weichzeichnen"
+  },
+  "optOutside": {
+    "message": "Schließen beim Klick daneben"
+  },
+  "optColors": {
+    "message": "Farben"
+  },
+  "optColor1": {
+    "message": "Farbe 1"
+  },
+  "optColor2": {
+    "message": "Farbe 2"
+  },
+  "optReset": {
+    "message": "Auf Pink / Teal zurücksetzen"
+  },
+  "optSaved": {
+    "message": "Gespeichert"
+  },
+  "optNote": {
+    "message": "Vorschauen laufen in einem eingebetteten Rahmen: Auf manchen Seiten bist du dort nicht eingeloggt. „In neuem Tab öffnen“ öffnet immer die echte Seite."
+  },
+  "optVersion": {
+    "message": "Version $V$",
+    "placeholders": {
+      "v": {
+        "content": "$1"
+      }
+    }
+  },
+  "optMode": {
+    "message": "Vorschau anzeigen als"
+  },
+  "modeOverlay": {
+    "message": "Schwebend in der Seite"
+  },
+  "modePopup": {
+    "message": "Popup-Fenster"
+  },
+  "optModeHint": {
+    "message": "Schwebend: sieht aus wie bei Zen, aber auf manchen Seiten bist du nicht eingeloggt. Popup: ein kleines echtes Browserfenster – immer eingeloggt, funktioniert auf jeder Seite."
+  },
+  "optCloseOnBlur": {
+    "message": "Popup schließen, wenn du zurück in den Browser klickst"
+  },
+  "optOverlay": {
+    "message": "Schwebendes Fenster"
+  },
+  "optPopup": {
+    "message": "Popup-Fenster"
+  },
+  "popupToTab": {
+    "message": "Als Tab öffnen"
+  },
+  "popupClose": {
+    "message": "Schließen"
+  },
+  "popEnabled": {
+    "message": "Peek an"
+  },
+  "popAll": {
+    "message": "Alle Einstellungen"
+  },
+  "optEnabled": {
+    "message": "Peek an"
+  },
+  "optUseLogin": {
+    "message": "In Vorschauen eingeloggt bleiben"
+  },
+  "optUseLoginHint": {
+    "message": "Schickt deine normalen Cookies an die Seite in der Vorschau – nur aus der Vorschau heraus und nur, solange sie offen ist. Die meisten Seiten zeigen dich dann eingeloggt; bei manchen (z. B. YouTube-Knöpfe wie „Mag ich“) kann einzelnes trotzdem fehlen."
+  },
+  "reload": {
+    "message": "Neu laden"
+  },
+  "maximize": {
+    "message": "Maximieren"
+  },
+  "restoreSize": {
+    "message": "Normale Größe"
+  },
+  "menuOpen": {
+    "message": "In Peek öffnen"
+  },
+  "menuSearch": {
+    "message": "„%s“ in Peek suchen"
+  },
+  "cmdSearch": {
+    "message": "Markierten Text in Peek suchen"
+  },
+  "optSearch": {
+    "message": "Markierten Text suchen"
+  },
+  "optEngine": {
+    "message": "Suchmaschine"
+  },
+  "optSearchHint": {
+    "message": "Text markieren und das Tastenkürzel drücken, oder Rechtsklick darauf → „… in Peek suchen“. Das Kürzel änderst du in Firefox: about:addons → Zahnrad → Tastenkürzel für Erweiterungen verwalten."
+  },
+  "optShortcut": {
+    "message": "Tastenkürzel"
+  },
+  "kindFull": {
+    "message": "Mit Leisten & Erweiterungen"
+  },
+  "kindSlim": {
+    "message": "Schlank (ohne Leisten)"
+  },
+  "kindHint": {
+    "message": "„Mit Leisten & Erweiterungen“ öffnet ein kleines normales Firefox-Fenster: Adressleiste, Erweiterungs-Knöpfe (uBlock, Dark Reader …) und alles andere sind da. „Schlank“ hat gar keine Leisten."
+  },
+  "cmdPeekSearch": {
+    "message": "Markierten Text in Peek suchen"
+  },
+  "cmdMenu": {
+    "message": "Windrad-Flow-Menü öffnen"
+  },
+  "cmdCopyUrl": {
+    "message": "Adresse der aktuellen Seite kopieren"
+  }
+}

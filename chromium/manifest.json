@@ -1,0 +1,173 @@
+{
+  "manifest_version": 3,
+  "name": "Windrad Flow",
+  "version": "0.19.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Windrad Flow",
+    "default_popup": "menu.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "background": {
+    "service_worker": "sw.js"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.youtube.com/live_chat*",
+        "*://*.youtube.com/live_chat_replay*",
+        "*://*.youtube.com/embed/*"
+      ],
+      "js": [
+        "compat.js",
+        "shared.js",
+        "boosts.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.youtube.com/live_chat*",
+        "*://*.youtube.com/live_chat_replay*",
+        "*://*.youtube.com/embed/*"
+      ],
+      "js": [
+        "youtube.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/live_chat*",
+        "*://*.youtube.com/live_chat_replay*",
+        "*://*.youtube.com/embed/*"
+      ],
+      "js": [
+        "compat.js",
+        "shared.js",
+        "youtube.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "youtube-main.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js",
+        "player.js",
+        "notes.js",
+        "volume.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "compat.js",
+        "peek.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      },
+      "description": "__MSG_cmdMenu__"
+    },
+    "open-palette": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "__MSG_cmdPalette__"
+    },
+    "copy-url": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "__MSG_cmdCopyUrl__"
+    },
+    "peek-search": {
+      "suggested_key": {
+        "default": "Alt+Shift+G"
+      },
+      "description": "__MSG_cmdPeekSearch__"
+    },
+    "toggle-note": {
+      "description": "__MSG_cmdNote__"
+    }
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "bookmarks",
+    "history",
+    "sessions",
+    "alarms",
+    "scripting",
+    "clipboardWrite",
+    "offscreen",
+    "contextMenus",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "palette.html",
+        "palette.css",
+        "palette.js",
+        "shared.js",
+        "compat.js",
+        "icons/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

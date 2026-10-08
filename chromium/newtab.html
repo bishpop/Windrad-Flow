@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="tabTitle">New tab</title>
+  <link rel="icon" href="icons/star.svg">
+  <link rel="stylesheet" href="start.css">
+</head>
+<body>
+  <div id="bg" aria-hidden="true"><div id="bg-img"></div></div>
+
+  <header class="topbar">
+    <button id="open-settings" class="glass icon-btn spin" type="button" data-i18n-aria="openSettings">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1l.4 2.6h4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+    </button>
+  </header>
+
+  <main class="center">
+    <p id="greeting" class="greeting"></p>
+
+    <form id="search" class="glass search" role="search" action="https://www.google.com/search" method="get">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M10.5 3a7.5 7.5 0 0 1 6 12l4.7 4.7-1.5 1.5-4.7-4.7A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+      <input id="q" name="q" type="search" autocomplete="off" spellcheck="false"
+             data-i18n-placeholder="searchPlaceholder" data-i18n-aria="search">
+      <kbd class="muted">/</kbd>
+    </form>
+
+    <section id="links" class="links">
+      <div id="links-grip" class="links-grip" data-i18n-aria="moveHint">⋮⋮</div>
+      <div id="cat-tabs" class="cat-tabs" role="tablist"></div>
+      <nav id="tiles" class="tiles" data-i18n-aria="quickLinks"></nav>
+    </section>
+  </main>
+
+  <!-- Uhr: frei verschiebbar (Standard oben mittig), fixierbar, Größe einstellbar -->
+  <h1 id="clock" class="clock">&nbsp;</h1>
+
+  <!-- frei verschiebbare Widgets landen hier -->
+  <div id="widget-layer"></div>
+
+  <button id="add-note" class="glass fab" type="button" data-i18n-aria="newNote">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
+    <span data-i18n="newNote">New note</span>
+  </button>
+
+  <!-- Einstellungen -->
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="settings" class="glass panel" aria-hidden="true">
+    <div class="panel-head">
+      <h2 data-i18n="settings">Settings</h2>
+      <button id="close-settings" class="icon-btn plain" type="button" data-i18n-aria="closeSettings">✕</button>
+    </div>
+
+    <section>
+      <h3 data-i18n="general">General</h3>
+      <div class="field">
+        <span data-i18n="language">Language</span>
+        <div class="segmented" id="s-lang">
+          <button type="button" data-value="en">English</button>
+          <button type="button" data-value="de">Deutsch</button>
+        </div>
+      </div>
+      <label class="field"><span data-i18n="yourName">Your name</span>
+        <input id="s-name" type="text" autocomplete="off" maxlength="30">
+      </label>
+      <label class="switch"><input id="s-gear" type="checkbox" autocomplete="off"><span data-i18n="gearHover">Show settings button only on hover</span></label>
+    </section>
+
+    <section>
+      <h3 data-i18n="clock">Clock</h3>
+      <label class="field">
+        <span><span data-i18n="clockSize">Size</span>: <b id="s-clocksize-val"></b></span>
+        <input id="s-clocksize" type="range" autocomplete="off" min="48" max="260" step="4">
+      </label>
+      <label class="switch"><input id="s-seconds" type="checkbox" autocomplete="off"><span data-i18n="showSeconds">Show seconds</span></label>
+      <label class="switch"><input id="s-clocklock" type="checkbox" autocomplete="off"><span data-i18n="clockLock">Lock clock</span></label>
+      <p class="hint muted" data-i18n="clockHint">Unlocked: drag the clock anywhere. Locked: it stays put and can't be clicked.</p>
+      <button id="s-clock-reset" class="btn ghost wide" type="button" data-i18n="clockReset">Move clock back to the top</button>
+    </section>
+
+    <section>
+      <h3 data-i18n="colors">Colors</h3>
+      <div class="color-row">
+        <span class="c-label" data-i18n="color1">Color 1</span>
+        <input id="s-c1-pick" type="color" autocomplete="off" data-i18n-aria="color1">
+        <input id="s-c1" class="hex" type="text" autocomplete="off" maxlength="7" spellcheck="false" placeholder="#ff7a95" data-i18n-aria="color1">
+      </div>
+      <div class="color-row">
+        <span class="c-label" data-i18n="color2">Color 2</span>
+        <input id="s-c2-pick" type="color" autocomplete="off" data-i18n-aria="color2">
+        <input id="s-c2" class="hex" type="text" autocomplete="off" maxlength="7" spellcheck="false" placeholder="#4fe3e0" data-i18n-aria="color2">
+      </div>
+      <div class="color-preview" aria-hidden="true"></div>
+      <button id="s-colors-reset" class="btn ghost wide" type="button" data-i18n="resetColors">Reset to pink / teal</button>
+    </section>
+
+    <section>
+      <h3 data-i18n="widgets">Widgets</h3>
+      <div id="s-widgets" class="switch-list"></div>
+      <button id="s-reset-pos" class="btn ghost wide" type="button" data-i18n="resetPositions">Reset widget positions</button>
+    </section>
+
+    <section id="s-links-section">
+      <h3 data-i18n="quickLinks">Quick links</h3>
+
+      <div class="field">
+        <span data-i18n="category">Category</span>
+        <div class="row">
+          <div class="dropdown" id="s-cat">
+            <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="dd-label"></span>
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="m7 10 5 5 5-5z"/></svg>
+            </button>
+            <ul class="dd-list glass" role="listbox" hidden></ul>
+          </div>
+          <button id="s-cat-add" class="btn" type="button" data-i18n-aria="addCategory">+</button>
+          <button id="s-cat-del" class="btn ghost danger" type="button" data-i18n-aria="deleteCategory">✕</button>
+        </div>
+      </div>
+      <label class="field"><span data-i18n="categoryName">Category name</span>
+        <input id="s-cat-name" type="text" autocomplete="off" maxlength="24">
+      </label>
+      <label class="field">
+        <span><span data-i18n="perRow">Per row</span>: <b id="s-perrow-val"></b></span>
+        <input id="s-perrow" type="range" autocomplete="off" min="1" max="12" step="1">
+      </label>
+      <label class="field">
+        <span><span data-i18n="maxLinks">Max. quick links</span>: <b id="s-max-val"></b></span>
+        <input id="s-max" type="range" autocomplete="off" min="1" max="48" step="1">
+      </label>
+
+      <ul id="s-tiles" class="tile-list"></ul>
+      <div class="row">
+        <input id="s-tile-name" type="text" autocomplete="off" data-i18n-placeholder="name" data-i18n-aria="name">
+        <input id="s-tile-url" type="text" autocomplete="off" placeholder="youtube.com" data-i18n-aria="address">
+      </div>
+      <div class="row icon-row">
+        <label class="icon-pick" data-i18n-aria="ownIcon">
+          <span id="s-tile-icon-prev" class="icon-prev">+</span>
+          <input id="s-tile-icon" type="file" accept="image/*" hidden>
+        </label>
+        <span class="hint muted" data-i18n="ownIconHint">Own icon (optional). Without one, the site's icon is used.</span>
+        <button id="s-tile-icon-clear" class="icon-clear hidden" type="button" data-i18n-aria="removeIcon">✕</button>
+      </div>
+      <button id="s-tile-add" class="btn wide" type="button" data-i18n="addLink">Add quick link</button>
+    </section>
+
+    <section>
+      <h3 data-i18n="tileDesign">Tile design</h3>
+      <div class="field">
+        <span data-i18n="linksPos">Position</span>
+        <div class="segmented" id="s-linkspos">
+          <button type="button" data-value="below" data-i18n="pos_below">Below search</button>
+          <button type="button" data-value="above" data-i18n="pos_above">Above search</button>
+          <button type="button" data-value="free" data-i18n="pos_free">Free</button>
+        </div>
+        <span id="s-linkspos-hint" class="hint muted hidden" data-i18n="posFreeHint">Hover over the quick links and drag them by the handle on the left.</span>
+      </div>
+      <div class="field">
+        <span data-i18n="shape">Shape</span>
+        <div class="shape-grid" id="s-shape"></div>
+      </div>
+      <div class="field">
+        <span data-i18n="tileSize">Tile size</span>
+        <div class="segmented" id="s-size">
+          <button type="button" data-value="xs">XS</button>
+          <button type="button" data-value="s">S</button>
+          <button type="button" data-value="m">M</button>
+          <button type="button" data-value="l">L</button>
+        </div>
+      </div>
+      <div class="field">
+        <span data-i18n="style">Style</span>
+        <div class="segmented" id="s-style">
+          <button type="button" data-value="glass" data-i18n="st_glass">Glass</button>
+          <button type="button" data-value="solid" data-i18n="st_solid">Solid</button>
+          <button type="button" data-value="outline" data-i18n="st_outline">Outline</button>
+          <button type="button" data-value="minimal" data-i18n="st_minimal">Minimal</button>
+        </div>
+      </div>
+      <div id="s-glass-opts">
+        <label class="field">
+          <span><span data-i18n="glassStrength">Glass strength</span>: <b id="s-glass-val"></b></span>
+          <input id="s-glass" type="range" autocomplete="off" min="0" max="30" step="1">
+        </label>
+        <label class="field">
+          <span><span data-i18n="glassBlur">Glass blur</span>: <b id="s-tblur-val"></b></span>
+          <input id="s-tblur" type="range" autocomplete="off" min="0" max="30" step="1">
+        </label>
+        <label class="switch"><input id="s-border" type="checkbox" autocomplete="off"><span data-i18n="glassBorder">Border</span></label>
+      </div>
+      <label class="switch"><input id="s-names" type="checkbox" autocomplete="off"><span data-i18n="showNames">Show names</span></label>
+      <label class="switch"><input id="s-addtile" type="checkbox" autocomplete="off"><span data-i18n="showAddTile">Show “+” tile</span></label>
+    </section>
+
+    <section>
+      <h3 data-i18n="background">Background</h3>
+      <div class="row">
+        <label class="btn file"><span data-i18n="chooseImage">Choose image</span>
+          <input id="s-bg" type="file" accept="image/*" hidden>
+        </label>
+        <button id="s-bg-reset" class="btn ghost" type="button" data-i18n="useGradient">Use theme gradient</button>
+      </div>
+      <label class="field"><span data-i18n="dim">Dim</span>
+        <input id="s-dim" type="range" autocomplete="off" min="0" max="80" step="5">
+      </label>
+      <label class="field"><span data-i18n="blur">Blur</span>
+        <input id="s-blur" type="range" autocomplete="off" min="0" max="20" step="1">
+      </label>
+    </section>
+    <section>
+      <h3 data-i18n="copyLink">Copy link</h3>
+      <label class="switch"><input id="s-copy-on" type="checkbox" autocomplete="off"><span data-i18n="copyOn">Copy the page address with a shortcut</span></label>
+      <div id="copy-opts">
+      <div class="field">
+        <span data-i18n="shortcut">Shortcut</span>
+        <div class="row">
+          <button id="s-shortcut" class="btn ghost shortcut" type="button"></button>
+          <button id="s-shortcut-reset" class="btn ghost" type="button" data-i18n="reset">Reset</button>
+        </div>
+        <span id="s-shortcut-msg" class="hint muted"></span>
+      </div>
+      <label class="switch"><input id="s-toast" type="checkbox" autocomplete="off"><span data-i18n="showToast">Show “Link copied”</span></label>
+      <div class="field">
+        <span data-i18n="toastPos">Notification position</span>
+        <div class="segmented" id="s-toastpos">
+          <button type="button" data-value="top-right" data-i18n-aria="tp_tr" data-i18n-title="tp_tr">↗</button>
+          <button type="button" data-value="top" data-i18n-aria="tp_t" data-i18n-title="tp_t">↑</button>
+          <button type="button" data-value="bottom-right" data-i18n-aria="tp_br" data-i18n-title="tp_br">↘</button>
+          <button type="button" data-value="bottom" data-i18n-aria="tp_b" data-i18n-title="tp_b">↓</button>
+        </div>
+      </div>
+      <label class="switch"><input id="s-clean" type="checkbox" autocomplete="off"><span data-i18n="cleanUrl">Remove tracking parameters (utm_ …)</span></label>
+      <button id="s-toast-test" class="btn ghost wide" type="button" data-i18n="preview">Preview</button>
+      </div>
+    </section>
+
+    <section>
+      <h3 data-i18n="backup">Backup</h3>
+      <p class="hint muted" data-i18n="backupHint">Saves all settings, quick links, notes and to-dos to a file.</p>
+      <div class="row">
+        <button id="s-export" class="btn" type="button" data-i18n="export">Export</button>
+        <label class="btn ghost file"><span data-i18n="import">Import</span>
+          <input id="s-import" type="file" accept="application/json,.json" hidden>
+        </label>
+      </div>
+      <p id="s-backup-msg" class="hint muted"></p>
+    </section>
+
+    <p id="s-version" class="version"></p>
+  </aside>
+
+  <script src="compat.js"></script>
+  <script src="toast.js"></script>
+  <script src="start.js"></script>
+</body>
+</html>
